@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sign in — UKJobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#0057B8;--brand-dark:#003F8A;--brand-light:#E8F0FB;--accent:#FF5722;--text:#0F1B2D;--text-muted:#5A6A7E;--border:#DDE3EC;--surface:#F5F7FA;--white:#fff;--success:#1B7D4E;--success-bg:#E8F5EE;--radius:10px;--radius-lg:16px;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 32px rgba(0,0,0,0.12)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--surface);min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+nav{position:fixed;top:0;left:0;right:0;background:white;border-bottom:1px solid var(--border);z-index:100;padding:0 2rem;height:60px;display:flex;align-items:center}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;gap:2rem}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--brand);letter-spacing:-1px;text-decoration:none}
+.logo em{color:var(--accent);font-style:normal}
+.nav-right{margin-left:auto;display:flex;gap:1rem;align-items:center}
+.nav-right a{font-size:14px;color:var(--text-muted);text-decoration:none}
+.nav-right a:hover{color:var(--brand)}
+.nav-btn{background:var(--brand);color:white!important;padding:7px 18px;border-radius:8px;font-weight:500}
+.nav-btn:hover{background:var(--brand-dark)!important}
+
+/* LEFT PANEL */
+.left-panel{background:linear-gradient(160deg,#003F8A 0%,#0057B8 60%,#1565C0 100%);padding:7rem 4rem 4rem;display:flex;flex-direction:column;justify-content:center;min-height:100vh;position:relative;overflow:hidden}
+.left-panel::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:rgba(255,255,255,0.04);border-radius:50%}
+.left-panel::after{content:'';position:absolute;bottom:-80px;left:-60px;width:350px;height:350px;background:rgba(255,255,255,0.03);border-radius:50%}
+.lp-inner{position:relative;z-index:1;max-width:400px}
+.lp-kicker{font-size:12px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.lp-heading{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:white;line-height:1.15;letter-spacing:-1px;margin-bottom:16px}
+.lp-heading em{color:#90CAF9;font-style:normal}
+.lp-sub{font-size:16px;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.7;margin-bottom:2.5rem}
+.benefit{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.benefit-icon{width:36px;height:36px;background:rgba(255,255,255,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.benefit-text strong{display:block;font-size:14px;font-weight:500;color:white;margin-bottom:2px}
+.benefit-text span{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5}
+.testimonial{margin-top:3rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:1.25rem}
+.testimonial p{font-size:14px;color:rgba(255,255,255,0.8);font-style:italic;line-height:1.6;margin-bottom:10px}
+.testimonial-author{display:flex;align-items:center;gap:10px}
+.t-avatar{width:34px;height:34px;background:#90CAF9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#003F8A}
+.t-name{font-size:13px;color:white;font-weight:500}
+.t-role{font-size:12px;color:rgba(255,255,255,0.5)}
+
+/* RIGHT PANEL */
+.right-panel{padding:7rem 4rem 4rem;display:flex;flex-direction:column;justify-content:center;background:white;min-height:100vh}
+.rp-inner{max-width:420px;width:100%}
+.tab-row{display:flex;background:var(--surface);border-radius:var(--radius);padding:4px;margin-bottom:2rem;border:1px solid var(--border)}
+.tab{flex:1;text-align:center;padding:9px;font-size:14px;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.2s;color:var(--text-muted)}
+.tab.active{background:white;color:var(--brand);box-shadow:var(--shadow)}
+.rp-heading{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px}
+.rp-sub{font-size:14px;color:var(--text-muted);margin-bottom:1.75rem;line-height:1.6}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px}
+.form-group input,.form-group select{width:100%;border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color 0.15s;background:white}
+.form-group input:focus,.form-group select:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,87,184,0.08)}
+.form-group input::placeholder{color:#A0AABB}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:44px}
+.pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;display:flex;align-items:center}
+.forgot{font-size:13px;color:var(--brand);text-decoration:none;float:right;margin-top:-28px;display:block;text-align:right;margin-bottom:0.75rem}
+.forgot:hover{text-decoration:underline}
+.submit-btn{width:100%;background:var(--brand);color:white;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;margin-top:0.5rem}
+.submit-btn:hover{background:var(--brand-dark)}
+.divider{display:flex;align-items:center;gap:12px;margin:1.25rem 0;color:var(--text-muted);font-size:13px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.social-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:11px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text);background:white;transition:border-color 0.15s,background 0.15s;margin-bottom:8px}
+.social-btn:hover{border-color:var(--brand);background:var(--brand-light)}
+.social-btn img{width:18px;height:18px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.terms{font-size:12px;color:var(--text-muted);line-height:1.6;margin-top:1rem;text-align:center}
+.terms a{color:var(--brand);text-decoration:none}
+.terms a:hover{text-decoration:underline}
+.success-screen{display:none;text-align:center;padding:2rem 0}
+.success-screen .tick{width:64px;height:64px;background:var(--success-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:28px}
+.success-screen h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px}
+.success-screen p{font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:1.5rem}
+.role-pill{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer;transition:all 0.15s;margin:4px}
+.role-pill.selected{background:var(--brand-light);border-color:var(--brand);color:var(--brand)}
+.role-pill:hover{border-color:var(--brand)}
+@media(max-width:768px){body{grid-template-columns:1fr}.left-panel{display:none}.right-panel{padding:5rem 1.5rem 2rem}}
+</style>
+</head>
+<body>
+<nav><div class="nav-inner"><a href="index.html" class="logo">UK<em>Jobs</em></a><div class="nav-right"><a href="index.html">Browse jobs</a><a href="employer.html">For employers</a></div></div></nav>
+
+<!-- LEFT -->
+<div class="left-panel">
+  <div class="lp-inner">
+    <p class="lp-kicker">🇬🇧 1.2 million jobs waiting</p>
+    <h1 class="lp-heading">Your next role<br>starts <em>here</em></h1>
+    <p class="lp-sub">Join 3.8 million UK job seekers who found their perfect role through UKJobs. It takes less than 2 minutes to get started.</p>
+    <div class="benefit"><div class="benefit-icon">🔔</div><div class="benefit-text"><strong>Instant job alerts</strong><span>Get notified the moment your dream job is posted</span></div></div>
+    <div class="benefit"><div class="benefit-icon">⚡</div><div class="benefit-text"><strong>One-click Easy Apply</strong><span>Apply to thousands of roles without re-entering your details</span></div></div>
+    <div class="benefit"><div class="benefit-icon">📊</div><div class="benefit-text"><strong>Salary insights</strong><span>See real pay data for your role and location</span></div></div>
+    <div class="benefit"><div class="benefit-icon">🏢</div><div class="benefit-text"><strong>Company reviews</strong><span>Know what it's really like before you apply</span></div></div>
+    <div class="testimonial">
+      <p>"I uploaded my CV on Monday and had three interviews booked by Thursday. UKJobs is genuinely brilliant."</p>
+      <div class="testimonial-author">
+        <div class="t-avatar">SR</div>
+        <div><div class="t-name">Sarah R.</div><div class="t-role">Software Engineer, hired at Monzo</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT -->
+<div class="right-panel">
+  <div class="rp-inner">
+    <div class="tab-row">
+      <div class="tab active" id="tabSignin" onclick="switchTab('signin')">Sign in</div>
+      <div class="tab" id="tabRegister" onclick="switchTab('register')">Create account</div>
+    </div>
+
+    <!-- SIGN IN FORM -->
+    <div id="signinForm">
+      <h2 class="rp-heading">Welcome back</h2>
+      <p class="rp-sub">Sign in to access your saved jobs, applications, and alerts.</p>
+      <button class="social-btn" onclick="socialLogin('Google')">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continue with Google
+      </button>
+      <button class="social-btn" onclick="socialLogin('LinkedIn')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Continue with LinkedIn
+      </button>
+      <div class="divider">or sign in with email</div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" placeholder="you@email.com" id="siEmail"/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" placeholder="Your password" id="siPw"/>
+          <button class="pw-toggle" onclick="togglePw('siPw',this)">👁</button>
+        </div>
+      </div>
+      <a href="#" class="forgot">Forgot password?</a>
+      <button class="submit-btn" onclick="doSignin()">Sign in to UKJobs</button>
+      <p class="terms">Don't have an account? <a href="#" onclick="switchTab('register')">Create one free</a></p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="display:none">
+      <div id="regStep1">
+        <h2 class="rp-heading">Create your account</h2>
+        <p class="rp-sub">Free forever. Find your next role faster with a UKJobs profile.</p>
+        <button class="social-btn" onclick="socialLogin('Google')">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign up with Google
+        </button>
+        <div class="divider">or use your email</div>
+        <div class="form-row">
+          <div class="form-group"><label>First name</label><input type="text" placeholder="Sarah"/></div>
+          <div class="form-group"><label>Last name</label><input type="text" placeholder="Thompson"/></div>
+        </div>
+        <div class="form-group"><label>Email address</label><input type="email" placeholder="you@email.com"/></div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap"><input type="password" placeholder="At least 8 characters" id="regPw"/><button class="pw-toggle" onclick="togglePw('regPw',this)">👁</button></div>
+        </div>
+        <div class="form-group">
+          <label>I am a...</label>
+          <select><option>Job seeker</option><option>Employer / Recruiter</option></select>
+        </div>
+        <button class="submit-btn" onclick="goStep2()">Continue →</button>
+        <p class="terms">By creating an account you agree to our <a href="#">Terms of use</a> and <a href="#">Privacy policy</a></p>
+      </div>
+      <div id="regStep2" style="display:none">
+        <h2 class="rp-heading">What are you looking for?</h2>
+        <p class="rp-sub">Help us personalise your job matches from day one.</p>
+        <div class="form-group"><label>Job title or role</label><input type="text" placeholder="e.g. Software Engineer, Product Manager"/></div>
+        <div class="form-group"><label>Preferred location</label><input type="text" placeholder="e.g. London, Manchester, Remote"/></div>
+        <div class="form-group"><label>Salary expectation</label><select><option>£20,000 – £30,000</option><option>£30,000 – £45,000</option><option selected>£45,000 – £65,000</option><option>£65,000 – £90,000</option><option>£90,000+</option></select></div>
+        <div class="form-group">
+          <label>Work preference</label><br>
+          <div style="display:flex;flex-wrap:wrap;margin-top:6px">
+            <span class="role-pill selected" onclick="this.classList.toggle('selected')">✓ Remote</span>
+            <span class="role-pill selected" onclick="this.classList.toggle('selected')">✓ Hybrid</span>
+            <span class="role-pill" onclick="this.classList.toggle('selected')">On-site</span>
+            <span class="role-pill" onclick="this.classList.toggle('selected')">Part-time</span>
+            <span class="role-pill" onclick="this.classList.toggle('selected')">Contract</span>
+          </div>
+        </div>
+        <button class="submit-btn" onclick="doRegister()">Create my account 🎉</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="tick">🎉</div>
+      <h3>You're all set!</h3>
+      <p>Your UKJobs account is ready. We've found <strong>847 jobs</strong> that match your preferences.</p>
+      <a href="profile.html" style="display:block;background:var(--brand);color:white;border-radius:10px;padding:13px;text-align:center;text-decoration:none;font-weight:500;font-size:15px;margin-bottom:10px">Complete my profile →</a>
+      <a href="index.html" style="display:block;border:1px solid var(--border);color:var(--text-muted);border-radius:10px;padding:12px;text-align:center;text-decoration:none;font-size:14px">Browse jobs first</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(t){
+  document.getElementById('tabSignin').classList.toggle('active',t==='signin');
+  document.getElementById('tabRegister').classList.toggle('active',t==='register');
+  document.getElementById('signinForm').style.display=t==='signin'?'block':'none';
+  document.getElementById('registerForm').style.display=t==='register'?'block':'none';
+  document.getElementById('successScreen').style.display='none';
+}
+function togglePw(id,btn){
+  const inp=document.getElementById(id);
+  inp.type=inp.type==='password'?'text':'password';
+  btn.textContent=inp.type==='password'?'👁':'🙈';
+}
+function doSignin(){showSuccess()}
+function goStep2(){document.getElementById('regStep1').style.display='none';document.getElementById('regStep2').style.display='block'}
+function doRegister(){showSuccess()}
+function socialLogin(p){showSuccess()}
+function showSuccess(){
+  document.getElementById('signinForm').style.display='none';
+  document.getElementById('registerForm').style.display='none';
+  document.getElementById('successScreen').style.display='block';
+}
+</script>
+
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0F1B2D;color:white;padding:14px 2rem;z-index:999;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,0.15)">
+  <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:250px">
+    <span style="font-size:20px">🍪</span>
+    <div>
+      <p style="font-size:14px;font-weight:500;margin-bottom:2px;font-family:DM Sans,sans-serif">We use essential cookies only</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);font-family:DM Sans,sans-serif">No tracking, no advertising cookies. Just the basics to keep the site working. <a href="privacy.html" style="color:#90CAF9;text-decoration:underline">Learn more</a></p>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button onclick="acceptCookies()" style="background:#0057B8;color:white;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif">Got it ✓</button>
+    <a href="privacy.html" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:9px 16px;font-size:13px;cursor:pointer;font-family:DM Sans,sans-serif;text-decoration:none;display:flex;align-items:center">Privacy Policy</a>
+  </div>
+</div>
+<script>
+function acceptCookies(){
+  localStorage.setItem('cookiesAccepted','true');
+  document.getElementById('cookieBanner').style.display='none';
+}
+window.addEventListener('load',function(){
+  if(!localStorage.getItem('cookiesAccepted')){
+    document.getElementById('cookieBanner').style.display='flex';
+  }
+});
+</script>
+
+</body>
+</html>

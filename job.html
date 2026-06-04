@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Job Details — UKJobs</title>
+<meta name="description" content="Full job description and apply now on UKJobs.live"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#0057B8;--brand-dark:#003F8A;--brand-light:#E8F0FB;--accent:#FF5722;--text:#0F1B2D;--text-muted:#5A6A7E;--border:#DDE3EC;--surface:#F5F7FA;--white:#fff;--success:#1B7D4E;--success-bg:#E8F5EE;--radius:10px;--radius-lg:16px;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 32px rgba(0,0,0,0.12)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--surface);min-height:100vh}
+nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem;height:60px;display:flex;align-items:center}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;gap:2rem}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--brand);letter-spacing:-1px;text-decoration:none}
+.logo em{color:var(--accent);font-style:normal}
+.nav-right{margin-left:auto;display:flex;gap:1rem;align-items:center}
+.nav-right a{font-size:14px;color:var(--text-muted);text-decoration:none}
+.nav-right a:hover{color:var(--brand)}
+.nav-btn{background:var(--brand);color:white!important;padding:7px 18px;border-radius:8px;font-weight:500}
+.breadcrumb{max-width:1200px;margin:0 auto;padding:14px 2rem;font-size:13px;color:var(--text-muted)}
+.breadcrumb a{color:var(--brand);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+
+/* MAIN LAYOUT */
+.page{max-width:1200px;margin:0 auto;padding:1.5rem 2rem 4rem;display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start}
+
+/* JOB HEADER CARD */
+.job-header-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:1.5rem;box-shadow:var(--shadow)}
+.jh-top{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.5rem}
+.company-logo{width:72px;height:72px;border-radius:14px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;flex-shrink:0}
+.jh-info{flex:1}
+.jh-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text);letter-spacing:-0.5px;line-height:1.2;margin-bottom:6px}
+.jh-company{font-size:16px;font-weight:500;color:var(--brand);margin-bottom:10px}
+.jh-meta{display:flex;gap:1rem;flex-wrap:wrap}
+.jh-meta-item{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--text-muted)}
+.jh-salary{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--success);margin-top:1rem}
+.jh-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.tag{font-size:13px;padding:5px 14px;border-radius:20px;border:1px solid var(--border);color:var(--text-muted);background:var(--surface)}
+.tag.blue{background:#E8F0FB;color:#185FA5;border-color:#B5D4F4}
+.tag.green{background:var(--success-bg);color:var(--success);border-color:#9FD8B5}
+.tag.orange{background:#FFF3E0;color:#E65100;border-color:#FFCC80}
+.tag.new{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
+.featured-banner{background:linear-gradient(to right,#FEFDF0,#FFF8DC);border:1px solid #E8C040;border-radius:var(--radius);padding:10px 16px;font-size:13px;color:#6B5900;display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+
+/* CONTENT SECTIONS */
+.content-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.content-card h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:1rem;letter-spacing:-0.3px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.content-card p{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:12px}
+.content-card ul{padding-left:1.25rem;margin-bottom:10px}
+.content-card li{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:6px}
+.content-card li::marker{color:var(--brand)}
+.skills-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.skill-tag{font-size:13px;padding:6px 16px;border-radius:20px;border:1px solid var(--border);color:var(--text);background:var(--surface);font-weight:500}
+
+/* COMPANY CARD */
+.company-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.company-card h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:1rem;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.company-info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
+.company-info-row:last-of-type{border-bottom:none}
+.company-info-row .label{color:var(--text-muted)}
+.company-info-row .value{font-weight:500;text-align:right}
+.company-about{font-size:14px;color:var(--text-muted);line-height:1.7;margin-top:10px}
+
+/* STICKY APPLY SIDEBAR */
+.apply-sidebar{}
+.apply-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;position:sticky;top:76px;box-shadow:var(--shadow)}
+.apply-card .salary{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--success);margin-bottom:4px}
+.apply-card .job-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
+.apply-card .company{font-size:14px;color:var(--text-muted);margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.apply-btn-main{width:100%;background:var(--brand);color:white;border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.apply-btn-main:hover{background:var(--brand-dark)}
+.apply-btn-main.easy{background:var(--accent)}
+.apply-btn-main.easy:hover{background:#E64A19}
+.save-btn{width:100%;background:white;color:var(--brand);border:1.5px solid var(--brand);border-radius:10px;padding:12px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.save-btn:hover,.save-btn.saved{background:var(--brand-light)}
+.apply-meta{margin-top:1.25rem}
+.apply-meta-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);padding:6px 0;border-bottom:1px solid var(--border)}
+.apply-meta-row:last-child{border-bottom:none}
+.apply-meta-row strong{color:var(--text);min-width:90px}
+.share-row{display:flex;gap:8px;margin-top:1.25rem}
+.share-btn{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text-muted);transition:all 0.15s;text-align:center}
+.share-btn:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+
+/* SIMILAR JOBS */
+.similar-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;position:sticky;top:calc(76px + 440px);box-shadow:var(--shadow);margin-top:1rem}
+.similar-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.similar-job{padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity 0.15s}
+.similar-job:last-child{border-bottom:none}
+.similar-job:hover{opacity:0.7}
+.sj-title{font-size:14px;font-weight:500;color:var(--brand);margin-bottom:2px}
+.sj-company{font-size:12px;color:var(--text-muted)}
+.sj-salary{font-size:12px;color:var(--success);font-weight:500}
+
+/* APPLY MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.visible{display:flex}
+.modal{background:white;border-radius:var(--radius-lg);padding:2rem;max-width:500px;width:100%;box-shadow:var(--shadow-lg);position:relative;max-height:90vh;overflow-y:auto;animation:modalIn 0.2s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px}
+.modal-close:hover{border-color:var(--brand);color:var(--brand)}
+.modal h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:4px}
+.modal p{font-size:14px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px}
+.form-group input,.form-group textarea,.form-group select{width:100%;border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color 0.15s;background:white}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,87,184,0.08)}
+.form-group textarea{resize:vertical;min-height:90px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:2rem;text-align:center;cursor:pointer;position:relative;transition:all 0.15s;margin-bottom:1rem}
+.upload-zone:hover{border-color:var(--brand);background:var(--brand-light)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.modal-btns{display:flex;gap:8px;margin-top:1rem}
+.modal-submit{flex:1;background:var(--brand);color:white;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.modal-submit:hover{background:var(--brand-dark)}
+.modal-cancel{background:white;color:var(--text-muted);border:1px solid var(--border);border-radius:10px;padding:12px 20px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.success-screen{text-align:center;padding:2rem 1rem;display:none}
+.success-screen .icon{font-size:52px;margin-bottom:1rem}
+.success-screen h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px}
+.success-screen p{font-size:14px;color:var(--text-muted);line-height:1.6;margin-bottom:1.5rem}
+
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:#0F1B2D;color:white;padding:12px 24px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s ease;white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:900px){
+  .page{grid-template-columns:1fr}
+  .apply-sidebar{order:-1}
+  .apply-card{position:relative;top:0}
+  .similar-card{position:relative;top:0}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- APPLY MODAL -->
+<div class="modal-overlay" id="applyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="applyForm">
+      <h2 id="modalJobTitle">Apply for role</h2>
+      <p id="modalJobSub">Complete your application below.</p>
+      <div class="form-row">
+        <div class="form-group"><label>First name</label><input type="text" placeholder="Sarah"/></div>
+        <div class="form-group"><label>Last name</label><input type="text" placeholder="Thompson"/></div>
+      </div>
+      <div class="form-group"><label>Email address</label><input type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Phone number</label><input type="tel" placeholder="+44 7XXX XXXXXX"/></div>
+      <div class="form-group"><label>LinkedIn profile <span style="color:var(--text-muted);font-weight:400">(optional)</span></label><input type="url" placeholder="linkedin.com/in/yourname"/></div>
+      <div class="form-group"><label>Cover letter <span style="color:var(--text-muted);font-weight:400">(optional)</span></label><textarea placeholder="Tell us why you're a great fit for this role..."></textarea></div>
+      <div class="upload-zone" id="cvZone">
+        <input type="file" accept=".pdf,.doc,.docx" onchange="handleCvUpload(this)"/>
+        <div style="font-size:32px;margin-bottom:8px">📄</div>
+        <p id="cvLabel"><strong>Upload your CV</strong><br><span style="font-size:13px;color:var(--text-muted)">PDF or Word — drag & drop or click to browse</span></p>
+      </div>
+      <div class="modal-btns">
+        <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+        <button class="modal-submit" onclick="submitApp()">Submit application 🚀</button>
+      </div>
+    </div>
+    <div class="success-screen" id="successScreen">
+      <div class="icon">🎉</div>
+      <h3>Application sent!</h3>
+      <p>Your application has been submitted successfully. The hiring team will be in touch within 5–7 business days.</p>
+      <button onclick="closeModal()" style="background:var(--brand);color:white;border:none;border-radius:10px;padding:12px 28px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif">Back to jobs</button>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">UK<em>Jobs</em></a>
+    <div class="nav-right">
+      <a href="index.html">Find jobs</a>
+      <a href="employer.html">Post a job</a>
+      <a href="signin.html" class="nav-btn">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Jobs</a> › <a href="index.html">Technology</a> › <span id="bcTitle">Job Details</span>
+</div>
+
+<div class="page">
+  <!-- LEFT COLUMN -->
+  <div class="left-col">
+    <div class="job-header-card" id="jobHeaderCard">
+      <!-- filled by JS -->
+    </div>
+    <div class="content-card" id="aboutRole">
+      <h2>About the role</h2>
+      <div id="roleAbout"></div>
+    </div>
+    <div class="content-card" id="responsibilitiesCard">
+      <h2>What you'll do</h2>
+      <ul id="roleResponsibilities"></ul>
+    </div>
+    <div class="content-card" id="requirementsCard">
+      <h2>What we're looking for</h2>
+      <ul id="roleRequirements"></ul>
+    </div>
+    <div class="content-card" id="skillsCard">
+      <h2>Skills & technologies</h2>
+      <div class="skills-grid" id="roleSkills"></div>
+    </div>
+    <div class="content-card" id="benefitsCard">
+      <h2>Benefits</h2>
+      <ul id="roleBenefits"></ul>
+    </div>
+    <div class="company-card" id="companyCard">
+      <h3 id="companyCardTitle">About the company</h3>
+      <p class="company-about" id="companyAbout"></p>
+      <div style="margin-top:1rem">
+        <div class="company-info-row"><span class="label">Industry</span><span class="value" id="cIndustry"></span></div>
+        <div class="company-info-row"><span class="label">Company size</span><span class="value" id="cSize"></span></div>
+        <div class="company-info-row"><span class="label">Founded</span><span class="value" id="cFounded"></span></div>
+        <div class="company-info-row"><span class="label">Headquarters</span><span class="value" id="cLocation"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="apply-sidebar">
+    <div class="apply-card" id="applyCard">
+      <!-- filled by JS -->
+    </div>
+    <div class="similar-card">
+      <h4>Similar jobs</h4>
+      <div id="similarJobs"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const JOBS=[
+  {id:1,title:"Senior Software Engineer",company:"HSBC Technology",initials:"HB",color:"#DB0011",bg:"#FFF0F0",location:"London, UK",salary:"£85,000 – £110,000",salaryNum:97500,type:"Full-time",mode:"Hybrid",posted:"Today",isNew:true,easyApply:true,featured:true,sector:"Technology",snippet:"Join HSBC's award-winning technology division building next-generation banking platforms used by 40 million UK customers. Work with Python, Kubernetes and AWS at massive scale.",skills:["Python","Kubernetes","AWS","Microservices","SQL","Docker","Terraform"],responsibilities:["Lead design of core banking APIs serving millions of requests daily","Mentor a team of 4 junior engineers and run weekly 1-to-1s","Drive migration from legacy monolith to cloud-native architecture on AWS","Work closely with product, security and compliance teams to ship safely","Contribute to engineering blog and internal knowledge sharing"],requirements:["5+ years software engineering experience in a production environment","Strong Python skills and experience with cloud platforms (AWS preferred)","Hands-on experience with Kubernetes and containerised architectures","Experience with financial systems or regulated environments a bonus","Excellent communication skills — able to explain technical concepts clearly"],benefits:["Competitive pension (up to 10% employer contribution)","Private medical and dental insurance","25 days holiday + bank holidays","Hybrid working — 3 days in office","Annual performance bonus up to 20%","Share save scheme","£3,000 learning & development budget"],about:"HSBC is one of the world's largest banking and financial services organisations, serving over 40 million customers in the UK and 39 million more globally. Our Technology division is at the heart of our transformation, building the platforms that power everyday banking for millions of people.",employees:"225,000+",founded:"1865",industry:"Banking & Financial Services"},
+  {id:2,title:"Data Scientist — ML Platform",company:"Lloyds Banking Group",initials:"LB",color:"#006A4D",bg:"#E8F5EE",location:"London / Edinburgh",salary:"£75,000 – £95,000",salaryNum:85000,type:"Full-time",mode:"Hybrid",posted:"Today",isNew:true,easyApply:true,featured:false,sector:"Technology",snippet:"Build and deploy machine learning models that detect fraud, personalise products and power credit decisions for 26 million Lloyds customers across the UK.",skills:["Python","Machine Learning","Apache Spark","SQL","TensorFlow","Scikit-learn","dbt"],responsibilities:["Develop and own ML models for fraud detection and credit risk scoring","Build robust data pipelines processing billions of daily transactions using Spark","Present model performance and insights to senior stakeholders and risk teams","Collaborate with engineering teams to productionise models in AWS","Contribute to our internal ML platform and tooling"],requirements:["3+ years data science experience in a commercial setting","Strong Python programming and ML fundamentals","Experience with big data tools (Spark, Hive, or similar)","Financial services experience a plus but not essential","Degree in Mathematics, Statistics, Computer Science or related field"],benefits:["Up to 15% pension","Private healthcare for you and family","28 days holiday","Flexible and hybrid working","Annual bonus scheme","Share scheme","Gym allowance"],about:"Lloyds Banking Group is the UK's largest retail bank, serving 26 million customers through Lloyds Bank, Halifax, Bank of Scotland and Scottish Widows.",employees:"60,000+",founded:"1765",industry:"Banking & Financial Services"},
+  {id:3,title:"Full Stack Developer",company:"Auto Trader UK",initials:"AT",color:"#FF6600",bg:"#FFF3E0",location:"Manchester, UK",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",isNew:true,easyApply:true,featured:false,sector:"Technology",snippet:"Auto Trader is the UK's largest digital automotive marketplace. Join our product engineering team building features used by 500,000 car buyers every single day.",skills:["React","Node.js","TypeScript","AWS","PostgreSQL","GraphQL","Jest"],responsibilities:["Build new consumer-facing features on the Auto Trader platform using React and Node.js","Write clean, well-tested code with a focus on performance and accessibility","Participate in agile ceremonies, planning and retrospectives","Contribute to technical architecture decisions and design reviews","Help interview and onboard new engineers"],requirements:["3+ years full stack experience with React and Node.js","Strong TypeScript skills","Experience with AWS and relational databases","Passion for great user experiences and clean code","Experience with testing frameworks (Jest, Cypress)"],benefits:["25 days holiday + bank holidays","Private healthcare","Pension (5% employer)","£2,000 tech equipment budget","Hybrid working (2 days in Manchester)","Cycle to work scheme","Regular team socials"],about:"Auto Trader is the UK's #1 automotive marketplace with over 500,000 vehicles listed. We connect millions of buyers and sellers every month across web and mobile.",employees:"800+",founded:"1977",industry:"Digital Marketplace"},
+  {id:4,title:"DevOps Engineer",company:"Sage Group",initials:"SG",color:"#00B050",bg:"#E8F5EE",location:"Newcastle upon Tyne",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",isNew:true,easyApply:false,featured:false,sector:"Technology",snippet:"Sage is the market leader in cloud business management. Help us build and maintain the CI/CD infrastructure that powers accounting software used by 3 million UK businesses.",skills:["Terraform","Kubernetes","Azure","GitHub Actions","Docker","Python","Bash"],responsibilities:["Own and continuously improve CI/CD pipelines across 40+ microservices","Manage Azure Kubernetes clusters across development, staging and production","Implement monitoring, alerting and dashboards using Datadog and Grafana","Drive reliability improvements and reduce mean time to recovery","Collaborate with developers to improve the inner development loop"],requirements:["3+ years DevOps or platform engineering experience","Strong Terraform and Kubernetes skills","Azure or AWS certification a bonus","Scripting ability in Python or Bash","Experience with observability tooling"],benefits:["25 days holiday","Hybrid working (Newcastle office)","Private healthcare","Pension scheme","Annual bonus","Employee share scheme"],about:"Sage is a global leader in cloud business management solutions, trusted by 3 million small and medium businesses in the UK for accounting, HR and payroll.",employees:"12,000+",founded:"1981",industry:"Business Software"},
+  {id:5,title:"Cybersecurity Analyst",company:"BT Group",initials:"BT",color:"#6633CC",bg:"#F3E8FF",location:"London, UK",salary:"£50,000 – £70,000",salaryNum:60000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Protect the UK's largest telco from evolving cyber threats. Join BT's world-class Security Operations Centre, monitoring and responding to threats across BT's global network.",skills:["SIEM","Incident Response","Python","Network Security","ISO 27001","Splunk","Threat Intelligence"],responsibilities:["Monitor and triage security alerts from BT's enterprise SIEM platform","Lead incident response for critical security events and coordinate with stakeholders","Produce threat intelligence reports and briefings for senior leadership","Work with engineering teams to identify and remediate vulnerabilities","Contribute to security awareness training across BT Group"],requirements:["2+ years cybersecurity experience in a SOC or similar environment","CISSP, CEH, CompTIA Security+ or equivalent certification","Experience with SIEM tools — Splunk or QRadar strongly preferred","Strong analytical skills and attention to detail","SC clearance eligible (required before start)"],benefits:["Competitive salary + shift allowance","Private healthcare","26 days holiday","Pension (10% employer)","BT product discounts","Career development programme"],about:"BT Group is the UK's largest telecommunications company, providing broadband, mobile and TV services. Our 3,000-person cybersecurity team protects critical national infrastructure.",employees:"100,000+",founded:"1846",industry:"Telecommunications"},
+  {id:6,title:"Product Manager — Digital",company:"Kingfisher plc",initials:"KF",color:"#FF6900",bg:"#FFF3E0",location:"London, UK",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Lead digital product strategy for B&Q and Screwfix online platforms, serving 6 million monthly UK shoppers.",skills:["Product Strategy","Agile","SQL","A/B Testing","UX","Jira","Amplitude"],responsibilities:["Own the product roadmap for B&Q.co.uk checkout and payments experience","Run customer discovery sprints, interviews and usability testing","Work cross-functionally with engineering, design, data and marketing","Define success metrics and OKRs, report performance to leadership","Prioritise ruthlessly against customer impact and business value"],requirements:["4+ years product management experience in ecommerce or retail tech","Data-driven approach with experience interpreting analytics","Hands-on experience with A/B testing","Strong stakeholder management skills","Experience working in agile product teams"],benefits:["Annual bonus up to 15%","Staff discount at B&Q and Screwfix","Private healthcare","Pension","25 days holiday","Hybrid working"],about:"Kingfisher is a FTSE 100 home improvement company operating B&Q, Screwfix and Castorama across 8 countries. Our digital team powers £3bn+ in annual online sales.",employees:"78,000+",founded:"1982",industry:"Retail & Ecommerce"},
+  {id:7,title:"iOS Developer",company:"Trainline",initials:"TL",color:"#00C4B4",bg:"#E0FAF8",location:"London, UK",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Remote",posted:"2 days ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Build the Trainline app used by 10 million UK travellers every month. Work on a highly rated, award-winning iOS app with a world-class mobile engineering team.",skills:["Swift","SwiftUI","iOS","REST APIs","XCTest","Core Data","Combine"],responsibilities:["Develop new features for the Trainline iOS app used by 10 million monthly users","Write comprehensive unit, snapshot and UI tests","Collaborate with designers and product managers in Figma and Jira","Participate in technical architecture discussions and design reviews","Monitor app performance and crash rates using Firebase"],requirements:["3+ years iOS development experience","Proficiency in Swift and SwiftUI","Strong testing mindset with experience in TDD","Published app on the App Store preferred","Experience with CI/CD for mobile (Bitrise, Fastlane)"],benefits:["Fully remote role","£500/month home office allowance","Private healthcare","25 days holiday","Free Trainline Pro subscription","Annual engineering conference budget"],about:"Trainline is Europe's leading independent rail and coach platform, helping 10 million customers book travel every month. Our iOS app is consistently rated 4.8 stars on the App Store.",employees:"1,000+",founded:"1999",industry:"Travel Technology"},
+  {id:8,title:"Cloud Architect",company:"Rolls-Royce",initials:"RR",color:"#1A1A2E",bg:"#F0F0F8",location:"Derby, UK",salary:"£90,000 – £120,000",salaryNum:105000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",isNew:false,easyApply:false,featured:true,sector:"Technology",snippet:"Define and own the cloud architecture strategy for Rolls-Royce's digital transformation programme. Work on cutting-edge engineering systems powering the world's most advanced aircraft engines.",skills:["AWS","Azure","Terraform","Enterprise Architecture","Security","Python","Well-Architected"],responsibilities:["Design and own cloud architecture for mission-critical engineering simulation systems","Lead the Cloud Centre of Excellence — a team of 6 cloud engineers","Ensure security, compliance and cost optimisation across all cloud platforms","Define and enforce cloud standards, guardrails and governance frameworks","Present architecture proposals to C-suite and board level stakeholders"],requirements:["8+ years IT or enterprise architecture experience","AWS or Azure Solutions Architect Professional certification","Experience in aerospace, defence or another regulated industry","Proven ability to lead complex multi-year transformation programmes","Active SC clearance or ability to obtain it"],benefits:["Bonus up to 20%","Defined contribution pension","Private healthcare","Rolls-Royce employee share scheme","Onsite gym in Derby","30 days holiday","Relocation support available"],about:"Rolls-Royce is one of the world's most iconic engineering companies, building engines for civil and military aircraft, ships and submarines. Our digital transformation is powered by a 4,000-strong technology team.",employees:"40,000+",founded:"1906",industry:"Aerospace & Defence"},
+  {id:9,title:"Backend Engineer — Payments",company:"Monzo Bank",initials:"MZ",color:"#FF5555",bg:"#FFF5F5",location:"London, UK",salary:"£80,000 – £110,000",salaryNum:95000,type:"Full-time",mode:"Remote",posted:"3 days ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Build the payment systems that process millions of transactions for Monzo's 9 million UK customers. Work with Go microservices at scale in a fully remote-friendly engineering culture.",skills:["Go","Microservices","PostgreSQL","Kafka","AWS","gRPC","Cassandra"],responsibilities:["Build and own backend services for Monzo Payments including Faster Payments and BACS","Drive technical design, architecture proposals and API contracts","Ensure 99.99% uptime for critical payment flows through careful design and testing","On-call rotation for payment systems (well compensated, rarely triggered)","Mentor junior engineers through code reviews and pairing"],requirements:["4+ years backend engineering in a production environment","Strong experience with Go, Rust or another compiled language","Understanding of distributed systems and eventual consistency","Experience in financial services or payments a bonus","Commitment to testing and code quality"],benefits:["Fully remote with optional London office access","£1,000 home office setup budget","Private healthcare (Bupa)","Pension","Share options","25 days holiday + bank holidays","£1,500 annual learning budget"],about:"Monzo is a fully-licensed UK digital bank serving 9 million customers, known for its beautiful app, transparent pricing and award-winning customer service.",employees:"3,000+",founded:"2015",industry:"Digital Banking"},
+  {id:10,title:"Machine Learning Engineer",company:"BenevolentAI",initials:"BA",color:"#5B21B6",bg:"#EDE9FE",location:"London, UK",salary:"£85,000 – £120,000",salaryNum:102500,type:"Full-time",mode:"Hybrid",posted:"4 days ago",isNew:false,easyApply:false,featured:false,sector:"Technology",snippet:"Use AI and machine learning to discover new medicines. BenevolentAI is a UK biotech pioneer applying deep learning to drug discovery — genuinely world-changing work.",skills:["Python","PyTorch","Graph Neural Networks","MLOps","Docker","Kubernetes","AWS"],responsibilities:["Develop and deploy ML models for target identification and drug discovery","Build robust, reproducible ML pipelines for production use","Collaborate with research scientists on novel model architectures","Contribute to open-source ML tooling used by the global research community","Present work at internal research forums and external conferences"],requirements:["3+ years ML engineering experience in production","Strong Python and PyTorch skills","Knowledge of graph neural networks or biological ML a bonus","PhD in Machine Learning, Computer Science or related field preferred","Experience deploying ML models to production at scale"],benefits:["Share options","Flexible hybrid working","Private healthcare","Pension","30 days holiday","Conference and publication support","£2,000 learning budget"],about:"BenevolentAI is a leading AI drug discovery company, using machine learning to develop treatments for serious diseases including ALS and atopic dermatitis faster than ever before.",employees:"500+",founded:"2013",industry:"AI & Biotech"},
+  {id:11,title:"Data Engineer",company:"Sky",initials:"SK",color:"#0078D4",bg:"#E8F0FB",location:"Osterley, West London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",isNew:false,easyApply:false,featured:false,sector:"Technology",snippet:"Build and scale data pipelines processing billions of viewing events from Sky's 23 million European customers.",skills:["Apache Spark","Kafka","SQL","Python","Databricks","Airflow","AWS"],responsibilities:["Design and build real-time streaming pipelines using Kafka and Spark","Optimise existing Spark jobs processing 10B+ daily events","Build data quality monitoring and alerting frameworks","Enable self-serve analytics for business and product teams","Document data models and pipeline architecture"],requirements:["3+ years data engineering experience","Strong SQL and Python programming skills","Hands-on experience with Apache Spark","Cloud platform experience (AWS preferred)","Experience with workflow orchestration (Airflow, Prefect)"],benefits:["Sky products (TV, broadband, mobile) at cost price","Private healthcare","27 days holiday","Pension","Annual bonus","Hybrid working (West London)"],about:"Sky is Europe's leading media and entertainment company, delivering content to 23 million customers. Our Data Platform team processes over 10 billion events daily.",employees:"32,000+",founded:"1989",industry:"Media & Entertainment"},
+  {id:12,title:"UX / Product Designer",company:"Just Eat Takeaway",initials:"JE",color:"#FF8000",bg:"#FFF3E0",location:"London, UK",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Design the ordering experience for Just Eat's 10 million UK customers.",skills:["Figma","User Research","Prototyping","Design Systems","Accessibility","Motion Design","iOS & Android"],responsibilities:["Lead end-to-end design for the ordering flow on iOS and Android","Plan and conduct usability testing with real customers","Own and evolve the Just Eat design system","Present design work to product leadership and cross-functional partners","Champion accessibility across the product"],requirements:["4+ years product design experience","Strong portfolio showing consumer product or mobile design","Deep proficiency in Figma","Experience designing for accessibility (WCAG 2.1)","Ability to work in fast-paced agile teams"],benefits:["Free Just Eat credit monthly","Private healthcare","25 days holiday","Hybrid working (London)","Pension","Annual design conference budget"],about:"Just Eat Takeaway is one of the world's largest food delivery companies, connecting 10 million UK customers with over 50,000 restaurant partners.",employees:"7,000+",founded:"2001",industry:"Food Delivery & Tech"},
+  {id:13,title:"Site Reliability Engineer",company:"Ocado Technology",initials:"OC",color:"#E30613",bg:"#FDEDEC",location:"Hatfield, Hertfordshire",salary:"£75,000 – £100,000",salaryNum:87500,type:"Full-time",mode:"Hybrid",posted:"5 days ago",isNew:false,easyApply:false,featured:false,sector:"Technology",snippet:"Keep Ocado's robotic warehouse systems and customer-facing platforms running flawlessly.",skills:["Kubernetes","Prometheus","Python","Linux","Terraform","Grafana","Go"],responsibilities:["Own reliability and performance of Ocado's warehouse control and consumer systems","Build observability tooling, dashboards and runbooks","Lead incident response and post-mortems","Drive SLO/SLA improvements across critical services","Reduce toil through automation"],requirements:["4+ years SRE, platform or production engineering experience","Strong Kubernetes and Linux systems administration","Experience with Prometheus, Grafana and alerting","Coding ability in Python or Go","Experience with Terraform or similar IaC tools"],benefits:["25 days holiday","Private healthcare","Pension","Share scheme","Gym membership","Hatfield office (free parking)","Annual bonus"],about:"Ocado Technology builds the proprietary software, robotics and AI that powers Ocado's automated warehouse operations — and licenses the technology to grocery retailers worldwide.",employees:"5,000+",founded:"2000",industry:"Retail Technology"},
+  {id:14,title:"Frontend Engineer — React",company:"Cazoo",initials:"CZ",color:"#00A0DC",bg:"#E6F6FD",location:"London, UK",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Remote",posted:"5 days ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Build the digital car buying experience used by hundreds of thousands of UK consumers.",skills:["React","TypeScript","Next.js","GraphQL","Jest","Storybook","Cypress"],responsibilities:["Build consumer-facing features on the Cazoo platform using React and Next.js","Write well-tested, accessible React components using Storybook","Collaborate with designers in Figma to implement pixel-perfect UIs","Participate in architecture discussions and code reviews","Monitor web performance using Core Web Vitals"],requirements:["3+ years frontend engineering experience","Strong React and TypeScript skills","Experience with Next.js and server-side rendering","Commitment to accessibility (WCAG 2.1)","Strong testing discipline with Jest and Cypress"],benefits:["Fully remote","£600 home office budget","Private healthcare","25 days holiday","Pension","Annual tech conference attendance","Cazoo car purchase discount"],about:"Cazoo is a UK online car retailer that makes buying a high-quality used car as easy and convenient as any other online purchase. Fully reconditioned, delivered to your door.",employees:"1,500+",founded:"2018",industry:"Automotive Technology"},
+  {id:15,title:"Engineering Manager",company:"Experian UK",initials:"EX",color:"#E2001A",bg:"#FDEDEC",location:"Nottingham, UK",salary:"£90,000 – £120,000",salaryNum:105000,type:"Full-time",mode:"Hybrid",posted:"6 days ago",isNew:false,easyApply:false,featured:false,sector:"Technology",snippet:"Lead a team of 8 engineers building Experian's consumer credit products used by 10 million UK customers.",skills:["Engineering Leadership","Java","AWS","Agile","System Design","Hiring","OKRs"],responsibilities:["Manage and develop a team of 8 backend engineers across two squads","Drive the technical roadmap and architecture decisions for consumer credit products","Own delivery against OKRs and product milestones","Hire, onboard and grow engineering talent through structured career development","Build a high-trust, high-performance team culture"],requirements:["3+ years engineering management experience","Strong technical background — Java or similar backend language","Experience managing remote or distributed teams","Proven track record of shipping high-quality products at pace","Excellent communication and stakeholder management"],benefits:["Annual bonus up to 20%","Private healthcare for family","30 days holiday","Flexible hybrid working","Pension","Share save scheme","Nottingham or London office"],about:"Experian is the world's leading global information services company, helping millions of UK consumers manage their financial health through credit scores, reports and identity protection.",employees:"22,000+",founded:"1980",industry:"Financial Services"},
+  {id:16,title:"Android Developer",company:"Deliveroo",initials:"DV",color:"#00CCBC",bg:"#E0FAF8",location:"London, UK",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Build the Deliveroo Android app used by millions of hungry UK customers.",skills:["Kotlin","Android","Jetpack Compose","REST APIs","Unit Testing","MVVM","Coroutines"],responsibilities:["Develop features for the Deliveroo consumer Android app","Write robust unit, integration and UI tests","Collaborate with iOS, backend and design teams on cross-platform features","Contribute to architecture decisions and internal tech talks","Help maintain our internal Android engineering blog"],requirements:["3+ years Android development experience","Proficiency in Kotlin and Jetpack Compose","Strong testing mindset","Experience with modular Android architecture","Understanding of performance profiling on Android"],benefits:["Monthly Deliveroo food credit","Private healthcare","25 days holiday","Pension","Share options","Annual bonus","Hybrid working (London)"],about:"Deliveroo is a leading food delivery company connecting millions of UK customers with their favourite restaurants, groceries and convenience items.",employees:"12,000+",founded:"2013",industry:"Food Delivery"},
+  {id:17,title:"Penetration Tester",company:"GCHQ / NCSC",initials:"GC",color:"#003087",bg:"#E8F0FB",location:"Cheltenham, UK",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"On-site",posted:"6 days ago",isNew:false,easyApply:false,featured:false,sector:"Technology",snippet:"Protect the UK from the most sophisticated cyber threats in the world. Join NCSC's world-class technical team.",skills:["Penetration Testing","Python","Network Security","Reverse Engineering","OSCP","Burp Suite","Linux"],responsibilities:["Conduct penetration tests on critical national infrastructure and government systems","Develop custom tools and exploits for red team operations","Produce detailed technical reports for senior government stakeholders","Contribute to NCSC published guidance and advisories","Support incident response for major national cyber incidents"],requirements:["3+ years penetration testing experience","OSCP, CREST CRT or equivalent offensive security certification","SC or DV clearance eligible (DV required, funded by NCSC)","Strong Python or C programming skills","UK resident for at least 5 years (clearance requirement)"],benefits:["Civil service pension (defined benefit)","Generous holiday allowance","GCHQ sports and social facilities","On-site gym and restaurant","Subsidised childcare","Unique and genuinely impactful work"],about:"The National Cyber Security Centre (NCSC) is part of GCHQ and is the UK government's technical authority on cybersecurity, protecting critical national infrastructure and government systems.",employees:"1,000+",founded:"2016",industry:"Government & Cybersecurity"},
+  {id:18,title:"Data Analyst",company:"Zoopla",initials:"ZP",color:"#8A2BE2",bg:"#F3E8FF",location:"London, UK",salary:"£40,000 – £55,000",salaryNum:47500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Turn data into insight at the UK's second largest property portal, serving 50 million monthly property searches.",skills:["SQL","Python","Tableau","dbt","Google Analytics","BigQuery","Looker"],responsibilities:["Build dashboards and self-serve reports for commercial and product teams","Write complex SQL queries across Zoopla's large property and user datasets","Own the analysis for A/B tests and product experiments end-to-end","Present findings and recommendations to senior leadership","Improve data quality and documentation"],requirements:["2+ years data analysis or analytics engineering experience","Advanced SQL skills — window functions, CTEs, complex joins","Experience with BI tools (Tableau, Looker or Power BI)","Python for data manipulation (pandas)","Property or marketplace experience a bonus"],benefits:["25 days holiday","Hybrid working (London)","Private healthcare","Pension","Annual bonus","Zoopla mortgage and rental discounts"],about:"Zoopla is the UK's second largest property portal, helping 50 million monthly users search for homes to buy or rent. We're backed by Silverlake and operate the UK's most comprehensive property data platform.",employees:"500+",founded:"2007",industry:"Property Technology"},
+  {id:19,title:"QA Engineer — Automation",company:"Bet365",initials:"B3",color:"#00A651",bg:"#E8F5EE",location:"Stoke-on-Trent, UK",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",isNew:false,easyApply:false,featured:false,sector:"Technology",snippet:"Help ensure the quality of one of the world's largest online gambling platforms, processing millions of bets daily.",skills:["Selenium","Python","Cypress","CI/CD","API Testing","Pytest","Jenkins"],responsibilities:["Design and maintain automated test suites for web and mobile platforms","Build test frameworks from scratch for new product and feature areas","Integrate automated tests into CI/CD pipelines on Jenkins and GitHub Actions","Collaborate with developers to shift testing left and catch defects early","Produce test reports and quality metrics for engineering leadership"],requirements:["3+ years QA automation engineering experience","Strong Python and Selenium or Cypress skills","Experience with API testing and performance testing","Experience with CI/CD pipeline integration","Strong attention to detail and quality mindset"],benefits:["Company pension","Private healthcare","25 days holiday","On-site gym at Stoke HQ","Free parking","Annual bonus","Hybrid working"],about:"Bet365 is one of the world's largest online gambling companies, processing over 3 billion transactions annually for 90 million customers globally. Our engineering team in Stoke-on-Trent is one of the UK's best.",employees:"5,000+",founded:"2000",industry:"Gaming & Technology"},
+  {id:20,title:"Graduate Software Developer",company:"Kainos",initials:"KN",color:"#004B87",bg:"#E8F0FB",location:"Belfast / Edinburgh / Birmingham",salary:"£28,000 – £35,000",salaryNum:31500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",isNew:false,easyApply:true,featured:false,sector:"Technology",snippet:"Start your tech career at Kainos — one of the UK's best places to work for graduates. Join a structured 2-year programme working on digital government services.",skills:["Java","Python","JavaScript","Agile","Git","HTML/CSS","SQL"],responsibilities:["Develop digital services for UK government clients (DVLA, NHS, DWP)","Learn software engineering best practices through mentoring and code reviews","Contribute to agile delivery teams working in two-week sprints","Study towards BCS or other professional certifications","Attend Kainos graduate events and training programme"],requirements:["2:1 degree in Computer Science, Software Engineering or related","Passion for technology and solving real problems","Good communication and teamwork skills","Right to work in UK (SC clearance required — UK residency 5 years)","Enthusiasm for public sector digital transformation"],benefits:["Structured graduate programme","Funded professional certifications","25 days holiday","Pension","Private healthcare after probation","Hybrid working across multiple UK offices","Annual salary review"],about:"Kainos is a UK digital services company consistently ranked as one of the best places to work in tech. We build digital services for government and healthcare used by millions of UK citizens every day.",employees:"3,000+",founded:"1986",industry:"Digital Government Services"}
+];
+
+function getSimilar(job){
+  return JOBS.filter(j=>j.id!==job.id).slice(0,4);
+}
+
+function modeTagColor(m){return m==='Remote'?'green':m==='Hybrid'?'blue':'orange'}
+
+function loadJob(){
+  const params=new URLSearchParams(window.location.search);
+  const id=parseInt(params.get('id'))||1;
+  const job=JOBS.find(j=>j.id===id)||JOBS[0];
+
+  // Breadcrumb
+  document.getElementById('bcTitle').textContent=job.title;
+  document.title=job.title+' at '+job.company+' — UKJobs';
+
+  // Header card
+  document.getElementById('jobHeaderCard').innerHTML=`
+    ${job.featured?'<div class="featured-banner">⭐ Featured listing — this employer has highlighted this role</div>':''}
+    <div class="jh-top">
+      <div class="company-logo" style="color:${job.color};background:${job.bg}">${job.initials}</div>
+      <div class="jh-info">
+        <h1 class="jh-title">${job.title}</h1>
+        <div class="jh-company">${job.company}</div>
+        <div class="jh-meta">
+          <div class="jh-meta-item">📍 ${job.location}</div>
+          <div class="jh-meta-item">💼 ${job.type}</div>
+          <div class="jh-meta-item">🏠 ${job.mode}</div>
+          <div class="jh-meta-item">🕐 Posted ${job.posted}</div>
+          <div class="jh-meta-item">🏢 ${job.sector}</div>
+        </div>
+        <div class="jh-salary">${job.salary}</div>
+        <div class="jh-tags">
+          <span class="tag ${modeTagColor(job.mode)}">${job.mode}</span>
+          <span class="tag blue">${job.type}</span>
+          ${job.isNew?'<span class="tag new">🆕 New</span>':''}
+          ${job.easyApply?'<span class="tag blue">⚡ Easy Apply</span>':''}
+        </div>
+      </div>
+    </div>`;
+
+  // About
+  document.getElementById('roleAbout').innerHTML=`<p>${job.snippet}</p><p>This is a fantastic opportunity to join one of the UK's leading employers and make a real impact. We offer a collaborative, inclusive culture where your work matters and your career can grow.</p>`;
+
+  // Responsibilities
+  const rl=document.getElementById('roleResponsibilities');
+  rl.innerHTML='';
+  job.responsibilities.forEach(r=>{const li=document.createElement('li');li.textContent=r;rl.appendChild(li)});
+
+  // Requirements
+  const req=document.getElementById('roleRequirements');
+  req.innerHTML='';
+  job.requirements.forEach(r=>{const li=document.createElement('li');li.textContent=r;req.appendChild(li)});
+
+  // Skills
+  const sk=document.getElementById('roleSkills');
+  sk.innerHTML='';
+  job.skills.forEach(s=>{const sp=document.createElement('span');sp.className='skill-tag';sp.textContent=s;sk.appendChild(sp)});
+
+  // Benefits
+  const bn=document.getElementById('roleBenefits');
+  bn.innerHTML='';
+  job.benefits.forEach(b=>{const li=document.createElement('li');li.textContent=b;bn.appendChild(li)});
+
+  // Company
+  document.getElementById('companyCardTitle').textContent='About '+job.company;
+  document.getElementById('companyAbout').textContent=job.about;
+  document.getElementById('cIndustry').textContent=job.industry;
+  document.getElementById('cSize').textContent=job.employees+' employees';
+  document.getElementById('cFounded').textContent=job.founded;
+  document.getElementById('cLocation').textContent=job.location;
+
+  // Apply sidebar
+  document.getElementById('applyCard').innerHTML=`
+    <div class="salary">${job.salary}</div>
+    <div class="job-title">${job.title}</div>
+    <div class="company">${job.company}</div>
+    ${job.easyApply
+      ?`<button class="apply-btn-main easy" onclick="openApply()">⚡ Easy Apply</button>`
+      :`<button class="apply-btn-main" onclick="openApply()">Apply now →</button>`}
+    <button class="save-btn" id="saveBtn" onclick="toggleSave(${job.id})">🔖 Save this job</button>
+    <div class="apply-meta">
+      <div class="apply-meta-row"><strong>Location</strong>${job.location}</div>
+      <div class="apply-meta-row"><strong>Job type</strong>${job.type}</div>
+      <div class="apply-meta-row"><strong>Work mode</strong>${job.mode}</div>
+      <div class="apply-meta-row"><strong>Posted</strong>${job.posted}</div>
+      <div class="apply-meta-row"><strong>Sector</strong>${job.sector}</div>
+    </div>
+    <div class="share-row">
+      <button class="share-btn" onclick="shareJob()">📤 Share</button>
+      <button class="share-btn" onclick="copyLink()">🔗 Copy link</button>
+    </div>`;
+
+  // Modal
+  document.getElementById('modalJobTitle').textContent='Apply — '+job.title;
+  document.getElementById('modalJobSub').textContent='Applying to '+job.company+'. Complete the form and attach your CV.';
+
+  // Similar jobs
+  const sim=document.getElementById('similarJobs');
+  sim.innerHTML='';
+  getSimilar(job).forEach(j=>{
+    const div=document.createElement('div');
+    div.className='similar-job';
+    div.onclick=()=>{window.location='job.html?id='+j.id};
+    div.innerHTML=`<div class="sj-title">${j.title}</div><div class="sj-company">${j.company} · ${j.location}</div><div class="sj-salary">${j.salary}</div>`;
+    sim.appendChild(div);
+  });
+}
+
+function openApply(){document.getElementById('applyModal').classList.add('visible')}
+function closeModal(){document.getElementById('applyModal').classList.remove('visible');document.getElementById('applyForm').style.display='block';document.getElementById('successScreen').style.display='none'}
+function handleCvUpload(input){if(input.files[0]){document.getElementById('cvLabel').innerHTML=`<strong style="color:var(--success)">✓ ${input.files[0].name} uploaded</strong>`}}
+function submitApp(){document.getElementById('applyForm').style.display='none';document.getElementById('successScreen').style.display='block'}
+function toggleSave(id){const btn=document.getElementById('saveBtn');const saved=btn.classList.toggle('saved');btn.textContent=saved?'🔖 Saved!':'🔖 Save this job';showToast(saved?'Job saved to your profile!':'Job removed from saved')}
+function shareJob(){if(navigator.share){navigator.share({title:document.title,url:window.location.href})}else{copyLink()}}
+function copyLink(){navigator.clipboard.writeText(window.location.href);showToast('🔗 Link copied to clipboard!')}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+window.onclick=function(e){if(e.target===document.getElementById('applyModal'))closeModal()}
+
+loadJob();
+</script>
+</body>
+</html>

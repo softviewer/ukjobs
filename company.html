@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Google DeepMind — Company Profile — UKJobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#0057B8;--brand-dark:#003F8A;--brand-light:#E8F0FB;--accent:#FF5722;--text:#0F1B2D;--text-muted:#5A6A7E;--border:#DDE3EC;--surface:#F5F7FA;--white:#fff;--success:#1B7D4E;--success-bg:#E8F5EE;--radius:10px;--radius-lg:16px;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 32px rgba(0,0,0,0.12)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--surface);min-height:100vh}
+nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem;height:60px;display:flex;align-items:center}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;gap:2rem}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--brand);letter-spacing:-1px;text-decoration:none}
+.logo em{color:var(--accent);font-style:normal}
+.nav-right{margin-left:auto;display:flex;gap:1rem;align-items:center}
+.nav-right a{font-size:14px;color:var(--text-muted);text-decoration:none}
+.nav-btn{background:var(--brand);color:white!important;padding:7px 18px;border-radius:8px;font-weight:500}
+.breadcrumb{font-size:13px;color:var(--text-muted);padding:12px 2rem;max-width:1200px;margin:0 auto}
+.breadcrumb a{color:var(--brand);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+
+/* COMPANY SELECTOR */
+.company-tabs{background:white;border-bottom:1px solid var(--border);padding:0 2rem}
+.ct-inner{max-width:1200px;margin:0 auto;display:flex;gap:0}
+.ctab{padding:14px 20px;font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--text-muted);transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.ctab .logo-dot{width:20px;height:20px;border-radius:5px;font-family:'Syne',sans-serif;font-weight:700;font-size:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ctab:hover{color:var(--brand)}
+.ctab.active{color:var(--brand);border-bottom-color:var(--brand)}
+
+/* COVER + HEADER */
+.cover{height:200px;background:linear-gradient(135deg,#1A73E8 0%,#0057B8 100%);position:relative}
+.cover-inner{max-width:1200px;margin:0 auto;padding:0 2rem;height:100%}
+.company-header{max-width:1200px;margin:0 auto;padding:0 2rem}
+.ch-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;display:flex;gap:1.5rem;align-items:flex-start;margin-top:-48px;position:relative;box-shadow:var(--shadow)}
+.ch-logo{width:80px;height:80px;border-radius:14px;border:3px solid white;background:white;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:24px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+.ch-info{flex:1;min-width:0}
+.ch-name{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}
+.ch-tagline{font-size:15px;color:var(--text-muted);margin-bottom:12px}
+.ch-meta{display:flex;gap:1.5rem;flex-wrap:wrap}
+.ch-meta-item{font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:5px}
+.ch-actions{display:flex;gap:8px;align-items:flex-start;flex-shrink:0}
+.btn-follow{border:1.5px solid var(--brand);color:var(--brand);background:white;border-radius:10px;padding:9px 20px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.btn-follow:hover,.btn-follow.following{background:var(--brand);color:white}
+.btn-website{border:1px solid var(--border);color:var(--text-muted);background:white;border-radius:10px;padding:9px 16px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.btn-website:hover{border-color:var(--brand);color:var(--brand)}
+
+/* RATING */
+.rating-badge{display:flex;align-items:center;gap:6px;background:var(--success-bg);border:1px solid #9FD8B5;border-radius:8px;padding:6px 12px;font-size:13px;color:var(--success);font-weight:500}
+.stars{color:#F59E0B;font-size:16px;letter-spacing:1px}
+
+/* MAIN */
+.main{max-width:1200px;margin:1.5rem auto;padding:0 2rem;display:grid;grid-template-columns:1fr 300px;gap:1.5rem;align-items:start}
+.tab-nav{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+.tnav{padding:10px 16px;font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--text-muted);transition:all 0.15s}
+.tnav.active{color:var(--brand);border-bottom-color:var(--brand)}
+.tnav:hover{color:var(--brand)}
+.section-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.section-card h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;letter-spacing:-0.2px}
+.section-card p{font-size:14px;color:var(--text-muted);line-height:1.8}
+.value-pill{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;margin:4px}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:10px}
+.review-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.review-title{font-size:14px;font-weight:500}
+.review-role{font-size:12px;color:var(--text-muted)}
+.review-stars{color:#F59E0B;font-size:14px}
+.review-text{font-size:13px;color:var(--text-muted);line-height:1.6}
+.review-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pros,.cons{font-size:12px;padding:8px;border-radius:6px}
+.pros{background:#E8F5EE;color:#1B7D4E}
+.cons{background:#FEF2F2;color:#B91C1C}
+.pros strong,.cons strong{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.stat-row:last-child{border-bottom:none}
+.stat-label{font-size:14px;color:var(--text-muted)}
+.stat-bar{flex:1;height:6px;background:var(--border);border-radius:3px;margin:0 12px;overflow:hidden}
+.stat-bar-fill{height:100%;background:var(--brand);border-radius:3px;transition:width 0.5s ease}
+.stat-score{font-size:14px;font-weight:600;color:var(--text);min-width:28px;text-align:right}
+.job-mini{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:8px;cursor:pointer;transition:border-color 0.15s}
+.job-mini:hover{border-color:var(--brand)}
+.job-mini-title{font-size:14px;font-weight:500;color:var(--brand);margin-bottom:3px}
+.job-mini-meta{font-size:12px;color:var(--text-muted);display:flex;gap:10px;flex-wrap:wrap}
+.job-mini-sal{font-size:12px;color:var(--success);font-weight:500}
+.tag{font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text-muted);background:var(--surface)}
+.sidebar-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem}
+.sidebar-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:12px}
+.info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.info-row:last-child{border-bottom:none}
+.info-row .label{color:var(--text-muted)}
+.info-row .value{font-weight:500;text-align:right;max-width:160px}
+.similar-co{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity 0.15s}
+.similar-co:last-child{border-bottom:none}
+.similar-co:hover{opacity:0.7}
+.sco-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;flex-shrink:0;border:1px solid var(--border)}
+.sco-name{font-size:14px;font-weight:500}
+.sco-jobs{font-size:12px;color:var(--brand)}
+.chart-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px}
+.chart-bar-label{min-width:80px;color:var(--text-muted)}
+.chart-bar{flex:1;height:28px;background:var(--surface);border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.chart-bar-fill{height:100%;background:var(--brand-light);border-radius:5px;display:flex;align-items:center;padding:0 10px;font-size:12px;color:var(--brand);font-weight:500;transition:width 0.6s ease}
+
+/* PHOTO GALLERY */
+.photo-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:120px 120px;gap:6px;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1rem}
+.photo{background:var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;color:white}
+.photo:nth-child(1){grid-row:1/3;background:linear-gradient(135deg,#1A73E8,#0057B8)}
+.photo:nth-child(2){background:linear-gradient(135deg,#1565C0,#1A73E8)}
+.photo:nth-child(3){background:linear-gradient(135deg,#0057B8,#1565C0)}
+.photo:nth-child(4){background:linear-gradient(135deg,#003F8A,#0057B8)}
+.photo:nth-child(5){background:linear-gradient(135deg,#1976D2,#42A5F5)}
+
+/* TABS CONTENT */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+@media(max-width:900px){.main{grid-template-columns:1fr}.ch-card{flex-wrap:wrap}.ch-actions{width:100%}.photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.photo:nth-child(1){grid-row:auto}}
+</style>
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo">UK<em>Jobs</em></a>
+  <div class="nav-right"><a href="index.html">Find jobs</a><a href="employer.html">Post a job</a><a href="signin.html" class="nav-btn">Sign in</a></div>
+</div></nav>
+
+<!-- COMPANY SWITCHER -->
+<div class="company-tabs">
+  <div class="ct-inner">
+    <div class="ctab active" onclick="switchCompany(0)"><div class="logo-dot" style="background:#1A73E8;color:white">GD</div>Google DeepMind</div>
+    <div class="ctab" onclick="switchCompany(1)"><div class="logo-dot" style="background:#191C20;color:white">R</div>Revolut</div>
+    <div class="ctab" onclick="switchCompany(2)"><div class="logo-dot" style="background:#FF5555;color:white">M</div>Monzo</div>
+    <div class="ctab" onclick="switchCompany(3)"><div class="logo-dot" style="background:#0078D4;color:white">S</div>Sky</div>
+    <div class="ctab" onclick="switchCompany(4)"><div class="logo-dot" style="background:#00CCBC;color:white">D</div>Deliveroo</div>
+  </div>
+</div>
+
+<div class="breadcrumb"><a href="index.html">Jobs</a> › <a href="#">Companies</a> › <span id="bcName">Google DeepMind</span></div>
+
+<!-- COVER -->
+<div class="cover" id="cover"><div class="cover-inner"></div></div>
+
+<!-- HEADER CARD -->
+<div class="company-header">
+  <div class="ch-card">
+    <div class="ch-logo" id="chLogo" style="color:#1A73E8;background:#E8F0FB">GD</div>
+    <div class="ch-info">
+      <div class="ch-name" id="chName">Google DeepMind</div>
+      <div class="ch-tagline" id="chTagline">Solving intelligence, advancing science</div>
+      <div class="ch-meta">
+        <div class="ch-meta-item">🏢 <span id="chIndustry">Artificial Intelligence</span></div>
+        <div class="ch-meta-item">📍 <span id="chHq">London, UK</span></div>
+        <div class="ch-meta-item">👥 <span id="chSize">1,000–5,000 employees</span></div>
+        <div class="ch-meta-item">📅 Founded <span id="chFounded">2010</span></div>
+        <div class="rating-badge"><span class="stars" id="chStars">★★★★★</span> <span id="chRating">4.6</span> · <span id="chReviews">312 reviews</span></div>
+      </div>
+    </div>
+    <div class="ch-actions">
+      <button class="btn-follow" id="followBtn" onclick="toggleFollow()">+ Follow</button>
+      <button class="btn-website" onclick="alert('Redirecting to company website...')">🌐 Website ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="content-col">
+    <div class="tab-nav">
+      <div class="tnav active" onclick="switchTab('overview')">Overview</div>
+      <div class="tnav" onclick="switchTab('jobs')">Jobs (<span id="jobCount">12</span>)</div>
+      <div class="tnav" onclick="switchTab('reviews')">Reviews</div>
+      <div class="tnav" onclick="switchTab('salaries')">Salaries</div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-content active" id="tab-overview">
+      <div class="photo-grid">
+        <div class="photo">🧠</div><div class="photo">💻</div><div class="photo">🔬</div>
+        <div class="photo">🤖</div><div class="photo">🌐</div>
+      </div>
+      <div class="section-card">
+        <h3>About <span id="aboutName">Google DeepMind</span></h3>
+        <p id="aboutText">Google DeepMind is a pioneering AI safety and research company, headquartered in London's King's Cross. We're working to develop AI responsibly for the long-term benefit of humanity — from healthcare breakthroughs to climate solutions. Our team of world-class researchers and engineers work on some of the most challenging problems in science and technology.</p>
+        <p style="margin-top:12px" id="aboutText2">Our mission is to solve intelligence, then use that to solve everything else. We believe AI has the potential to accelerate scientific discovery, unlock solutions to humanity's greatest challenges, and drive economic growth.</p>
+      </div>
+      <div class="section-card">
+        <h3>Our values</h3>
+        <div id="valuesList">
+          <span class="value-pill">🌍 Mission-driven</span>
+          <span class="value-pill">🔬 Scientific rigour</span>
+          <span class="value-pill">🤝 Collaborative</span>
+          <span class="value-pill">🛡️ Safety-first</span>
+          <span class="value-pill">🌱 Continuous learning</span>
+          <span class="value-pill">💡 Bold thinking</span>
+        </div>
+      </div>
+      <div class="section-card">
+        <h3>Employee ratings</h3>
+        <div id="ratingBars">
+          <div class="stat-row"><span class="stat-label">Work-life balance</span><div class="stat-bar"><div class="stat-bar-fill" style="width:82%"></div></div><span class="stat-score">4.1</span></div>
+          <div class="stat-row"><span class="stat-label">Compensation</span><div class="stat-bar"><div class="stat-bar-fill" style="width:92%"></div></div><span class="stat-score">4.6</span></div>
+          <div class="stat-row"><span class="stat-label">Career growth</span><div class="stat-bar"><div class="stat-bar-fill" style="width:88%"></div></div><span class="stat-score">4.4</span></div>
+          <div class="stat-row"><span class="stat-label">Culture & values</span><div class="stat-bar"><div class="stat-bar-fill" style="width:94%"></div></div><span class="stat-score">4.7</span></div>
+          <div class="stat-row"><span class="stat-label">Senior leadership</span><div class="stat-bar"><div class="stat-bar-fill" style="width:86%"></div></div><span class="stat-score">4.3</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOBS TAB -->
+    <div class="tab-content" id="tab-jobs">
+      <div class="section-card">
+        <h3 id="jobsHeading">Open roles at Google DeepMind</h3>
+        <div id="jobsList">
+          <div class="job-mini" onclick="window.location='index.html'">
+            <div class="job-mini-title">Senior Software Engineer</div>
+            <div class="job-mini-meta"><span>📍 London, UK</span><span>🏠 Hybrid</span><span>💼 Full-time</span><span class="job-mini-sal">£90,000 – £130,000</span></div>
+          </div>
+          <div class="job-mini" onclick="window.location='index.html'">
+            <div class="job-mini-title">Research Engineer — Language Models</div>
+            <div class="job-mini-meta"><span>📍 London, UK</span><span>🏠 Hybrid</span><span>💼 Full-time</span><span class="job-mini-sal">£95,000 – £140,000</span></div>
+          </div>
+          <div class="job-mini" onclick="window.location='index.html'">
+            <div class="job-mini-title">Staff ML Engineer</div>
+            <div class="job-mini-meta"><span>📍 London, UK</span><span>🏠 Remote</span><span>💼 Full-time</span><span class="job-mini-sal">£110,000 – £160,000</span></div>
+          </div>
+          <div class="job-mini" onclick="window.location='index.html'">
+            <div class="job-mini-title">Product Manager — AI Safety</div>
+            <div class="job-mini-meta"><span>📍 London, UK</span><span>🏠 Hybrid</span><span>💼 Full-time</span><span class="job-mini-sal">£85,000 – £115,000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEWS TAB -->
+    <div class="tab-content" id="tab-reviews">
+      <div class="section-card">
+        <h3>Employee reviews</h3>
+        <div id="reviewsList">
+          <div class="review-card">
+            <div class="review-header"><div><div class="review-title">World-class people, genuinely exciting work</div><div class="review-role">Software Engineer · London</div></div><div class="review-stars">★★★★★ 5.0</div></div>
+            <p class="review-text">I've learned more in 18 months here than in my previous 4 years combined. The calibre of colleagues is extraordinary and the problems are genuinely hard.</p>
+            <div class="review-pros-cons"><div class="pros"><strong>Pros</strong>The research environment, compensation, and mission</div><div class="cons"><strong>Cons</strong>Fast pace can be intense at times</div></div>
+          </div>
+          <div class="review-card">
+            <div class="review-header"><div><div class="review-title">Exceptional mission, great benefits</div><div class="review-role">Research Scientist · London</div></div><div class="review-stars">★★★★★ 4.5</div></div>
+            <p class="review-text">If you want to work on hard problems that actually matter, there's nowhere better. The team culture is collaborative and people genuinely want to help each other succeed.</p>
+            <div class="review-pros-cons"><div class="pros"><strong>Pros</strong>Benefits, mission alignment, smart colleagues</div><div class="cons"><strong>Cons</strong>Work-life balance can slip during crunch</div></div>
+          </div>
+          <div class="review-card">
+            <div class="review-header"><div><div class="review-title">Brilliant place to grow your career in AI</div><div class="review-role">ML Engineer · London</div></div><div class="review-stars">★★★★☆ 4.0</div></div>
+            <p class="review-text">Great learning opportunities and access to compute resources that most companies only dream of. Management is generally strong and supportive.</p>
+            <div class="review-pros-cons"><div class="pros"><strong>Pros</strong>Learning resources and internal mobility</div><div class="cons"><strong>Cons</strong>Bureaucracy has increased as company scaled</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALARIES TAB -->
+    <div class="tab-content" id="tab-salaries">
+      <div class="section-card">
+        <h3>Salary ranges by role</h3>
+        <div id="salaryBars">
+          <div class="chart-bar-row"><span class="chart-bar-label">Staff Eng.</span><div class="chart-bar"><div class="chart-bar-fill" style="width:95%">£110k – £180k</div></div></div>
+          <div class="chart-bar-row"><span class="chart-bar-label">Sr. Engineer</span><div class="chart-bar"><div class="chart-bar-fill" style="width:80%">£90k – £130k</div></div></div>
+          <div class="chart-bar-row"><span class="chart-bar-label">Engineer</span><div class="chart-bar"><div class="chart-bar-fill" style="width:60%">£65k – £95k</div></div></div>
+          <div class="chart-bar-row"><span class="chart-bar-label">Product Mgr</span><div class="chart-bar"><div class="chart-bar-fill" style="width:70%">£80k – £115k</div></div></div>
+          <div class="chart-bar-row"><span class="chart-bar-label">Data Science</span><div class="chart-bar"><div class="chart-bar-fill" style="width:75%">£75k – £120k</div></div></div>
+          <div class="chart-bar-row"><span class="chart-bar-label">Research</span><div class="chart-bar"><div class="chart-bar-fill" style="width:85%">£90k – £150k</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="sidebar-card">
+      <h4>Company facts</h4>
+      <div class="info-row"><span class="label">Industry</span><span class="value" id="sbIndustry">Artificial Intelligence</span></div>
+      <div class="info-row"><span class="label">Headquarters</span><span class="value" id="sbHq">London, UK</span></div>
+      <div class="info-row"><span class="label">Founded</span><span class="value" id="sbFounded">2010</span></div>
+      <div class="info-row"><span class="label">Employees</span><span class="value" id="sbSize">1,000–5,000</span></div>
+      <div class="info-row"><span class="label">Open jobs</span><span class="value" style="color:var(--brand)" id="sbJobs">12 on UKJobs</span></div>
+      <div class="info-row"><span class="label">Followers</span><span class="value" id="sbFollowers">4,820</span></div>
+    </div>
+    <div class="sidebar-card">
+      <h4>Similar companies</h4>
+      <div class="similar-co" onclick="window.location='company.html'"><div class="sco-logo" style="background:#E8F0FB;color:#1A73E8">GG</div><div><div class="sco-name">Google UK</div><div class="sco-jobs">38 open roles</div></div></div>
+      <div class="similar-co" onclick="window.location='company.html'"><div class="sco-logo" style="background:#FFF3E0;color:#E65100">MS</div><div><div class="sco-name">Microsoft UK</div><div class="sco-jobs">24 open roles</div></div></div>
+      <div class="similar-co" onclick="window.location='company.html'"><div class="sco-logo" style="background:#E8F5EE;color:#1B7D4E">OP</div><div><div class="sco-name">OpenAI</div><div class="sco-jobs">7 open roles</div></div></div>
+      <div class="similar-co" onclick="window.location='company.html'"><div class="sco-logo" style="background:#FEF2F2;color:#B91C1C">AN</div><div><div class="sco-name">Anthropic UK</div><div class="sco-jobs">5 open roles</div></div></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const COMPANIES=[
+  {name:'Google DeepMind',initials:'GD',color:'#1A73E8',bg:'#E8F0FB',cover:'linear-gradient(135deg,#1A73E8,#0057B8)',industry:'Artificial Intelligence',hq:'London, UK',size:'1,000–5,000',founded:'2010',rating:'4.6',reviews:'312',stars:'★★★★★',about:'Google DeepMind is a pioneering AI safety and research company...',tagline:'Solving intelligence, advancing science',jobs:12},
+  {name:'Revolut',initials:'R',color:'#191C20',bg:'#F5F7FA',cover:'linear-gradient(135deg,#191C20,#3A3F4B)',industry:'Fintech / Banking',hq:'London, UK',size:'5,000–10,000',founded:'2015',rating:'4.1',reviews:'1,204',stars:'★★★★☆',about:'Revolut is one of the world\'s largest fintech companies...',tagline:'The global financial superapp',jobs:28},
+  {name:'Monzo',initials:'M',color:'#FF5555',bg:'#FFF5F5',cover:'linear-gradient(135deg,#FF5555,#FF3333)',industry:'Digital Banking',hq:'London, UK',size:'2,000–5,000',founded:'2015',rating:'4.4',reviews:'687',stars:'★★★★★',about:'Monzo is a fully-licensed digital bank serving 9M+ UK customers...',tagline:'The bank that makes money work for everyone',jobs:15},
+  {name:'Sky',initials:'S',color:'#0078D4',bg:'#E8F0FB',cover:'linear-gradient(135deg,#0078D4,#005A9E)',industry:'Media & Entertainment',hq:'Osterley, London',size:'30,000+',founded:'1989',rating:'3.9',reviews:'2,341',stars:'★★★★☆',about:'Sky is one of Europe\'s leading media and entertainment companies...',tagline:'Believe in better',jobs:47},
+  {name:'Deliveroo',initials:'D',color:'#00CCBC',bg:'#E0FAF8',cover:'linear-gradient(135deg,#00CCBC,#009A94)',industry:'Food Delivery / Tech',hq:'London, UK',size:'10,000–15,000',founded:'2013',rating:'3.7',reviews:'890',stars:'★★★★☆',about:'Deliveroo is a food delivery marketplace connecting customers to restaurants...',tagline:'Your favourite food, delivered fast',jobs:21}
+];
+
+let activeTab='overview';
+function switchTab(t){
+  document.querySelectorAll('.tnav').forEach((el,i)=>{el.classList.toggle('active',['overview','jobs','reviews','salaries'][i]===t)});
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  activeTab=t;
+}
+function switchCompany(i){
+  const c=COMPANIES[i];
+  document.querySelectorAll('.ctab').forEach((el,j)=>el.classList.toggle('active',j===i));
+  document.getElementById('bcName').textContent=c.name;
+  document.getElementById('cover').style.background=c.cover;
+  document.getElementById('chLogo').textContent=c.initials;
+  document.getElementById('chLogo').style.color=c.color;
+  document.getElementById('chLogo').style.background=c.bg;
+  document.getElementById('chName').textContent=c.name;
+  document.getElementById('chTagline').textContent=c.tagline;
+  document.getElementById('chIndustry').textContent=c.industry;
+  document.getElementById('chHq').textContent=c.hq;
+  document.getElementById('chSize').textContent=c.size+' employees';
+  document.getElementById('chFounded').textContent=c.founded;
+  document.getElementById('chStars').textContent=c.stars;
+  document.getElementById('chRating').textContent=c.rating;
+  document.getElementById('chReviews').textContent=c.reviews+' reviews';
+  document.getElementById('aboutName').textContent=c.name;
+  document.getElementById('aboutText').textContent=c.about;
+  document.getElementById('jobCount').textContent=c.jobs;
+  document.getElementById('sbIndustry').textContent=c.industry;
+  document.getElementById('sbHq').textContent=c.hq;
+  document.getElementById('sbFounded').textContent=c.founded;
+  document.getElementById('sbSize').textContent=c.size;
+  document.getElementById('sbJobs').textContent=c.jobs+' on UKJobs';
+  document.getElementById('jobsHeading').textContent='Open roles at '+c.name;
+  document.getElementById('followBtn').classList.remove('following');
+  document.getElementById('followBtn').textContent='+ Follow';
+}
+function toggleFollow(){
+  const btn=document.getElementById('followBtn');
+  const isFollowing=btn.classList.toggle('following');
+  btn.textContent=isFollowing?'✓ Following':'+ Follow';
+}
+</script>
+
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0F1B2D;color:white;padding:14px 2rem;z-index:999;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,0.15)">
+  <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:250px">
+    <span style="font-size:20px">🍪</span>
+    <div>
+      <p style="font-size:14px;font-weight:500;margin-bottom:2px;font-family:DM Sans,sans-serif">We use essential cookies only</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);font-family:DM Sans,sans-serif">No tracking, no advertising cookies. Just the basics to keep the site working. <a href="privacy.html" style="color:#90CAF9;text-decoration:underline">Learn more</a></p>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button onclick="acceptCookies()" style="background:#0057B8;color:white;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif">Got it ✓</button>
+    <a href="privacy.html" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:9px 16px;font-size:13px;cursor:pointer;font-family:DM Sans,sans-serif;text-decoration:none;display:flex;align-items:center">Privacy Policy</a>
+  </div>
+</div>
+<script>
+function acceptCookies(){
+  localStorage.setItem('cookiesAccepted','true');
+  document.getElementById('cookieBanner').style.display='none';
+}
+window.addEventListener('load',function(){
+  if(!localStorage.getItem('cookiesAccepted')){
+    document.getElementById('cookieBanner').style.display='flex';
+  }
+});
+</script>
+
+</body>
+</html>

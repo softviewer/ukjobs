@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>UKJobs — Find Tech, Finance & Management Jobs Across the UK</title>
+<meta name="description" content="Search thousands of Technology, Finance and Management jobs across the UK. Find your next role at top UK companies on UKJobs.live"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#0057B8;--brand-dark:#003F8A;--brand-light:#E8F0FB;--accent:#FF5722;--text:#0F1B2D;--text-muted:#5A6A7E;--border:#DDE3EC;--surface:#F5F7FA;--white:#fff;--success:#1B7D4E;--success-bg:#E8F5EE;--radius:10px;--radius-lg:16px;--shadow:0 2px 12px rgba(0,0,0,0.08)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--surface);min-height:100vh;font-size:15px}
+nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:2rem;height:60px}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--brand);letter-spacing:-1px;text-decoration:none}
+.logo em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:1.5rem;align-items:center;margin-left:auto}
+.nav-links a{text-decoration:none;font-size:14px;color:var(--text-muted);transition:color 0.15s}
+.nav-links a:hover{color:var(--brand)}
+.nav-btn{background:var(--brand);color:white!important;padding:7px 18px;border-radius:8px;font-weight:500!important}
+.nav-employer{border:1px solid var(--border);padding:7px 16px;border-radius:8px;font-weight:500!important;color:var(--text)!important}
+.nav-employer:hover{border-color:var(--brand)!important;color:var(--brand)!important}
+.hero{background:linear-gradient(135deg,#003F8A 0%,#0057B8 60%,#1565C0 100%);padding:3rem 2rem 2.5rem}
+.hero-inner{max-width:860px;margin:0 auto}
+.hero-kicker{font-size:12px;font-weight:500;color:rgba(255,255,255,0.65);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.hero-heading{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,42px);font-weight:800;color:white;line-height:1.15;margin-bottom:6px;letter-spacing:-1px}
+.hero-heading em{color:#90CAF9;font-style:normal}
+.hero-sub{color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:1.5rem}
+.search-box{background:white;border-radius:var(--radius-lg);padding:7px;display:flex;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,0.15)}
+.sf{flex:1;display:flex;align-items:center;gap:10px;padding:8px 12px;border-right:1px solid var(--border)}
+.sf:last-of-type{border-right:none}
+.sf svg{flex-shrink:0;color:var(--text-muted);width:18px;height:18px}
+.sf label{display:block;font-size:11px;font-weight:500;color:var(--text-muted);margin-bottom:1px}
+.sf input{border:none;outline:none;font-size:14px;width:100%;font-family:'DM Sans',sans-serif;color:var(--text);background:transparent}
+.sf input::placeholder{color:#A0AABB}
+.search-btn{background:var(--accent);color:white;border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;white-space:nowrap}
+.search-btn:hover{background:#E64A19}
+.popular{margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.popular span{font-size:12px;color:rgba(255,255,255,0.6)}
+.pop-tag{font-size:12px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:4px 12px;border-radius:20px;cursor:pointer;border:1px solid rgba(255,255,255,0.2);transition:all 0.15s}
+.pop-tag:hover{background:rgba(255,255,255,0.3)}
+.hero-stats{display:flex;gap:2rem;margin-top:1.25rem}
+.hero-stat strong{display:block;font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:white}
+.hero-stat span{font-size:12px;color:rgba(255,255,255,0.6)}
+.container{max-width:1200px;margin:0 auto;padding:1.5rem 2rem;display:grid;grid-template-columns:240px 1fr;gap:1.5rem;align-items:start}
+.sidebar{position:sticky;top:76px}
+.filter-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem 1.2rem;margin-bottom:1rem}
+.filter-card h3{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.filter-card h3 button{font-size:12px;color:var(--brand);background:none;border:none;cursor:pointer;font-family:inherit;font-weight:400;text-transform:none;letter-spacing:0}
+.filter-opt{display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer}
+.filter-opt input[type=checkbox]{accent-color:var(--brand);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+.filter-opt label{font-size:13px;cursor:pointer;color:var(--text);flex:1}
+.filter-opt .cnt{font-size:11px;color:var(--text-muted);background:var(--surface);padding:1px 6px;border-radius:20px}
+.salary-range input[type=range]{width:100%;accent-color:var(--brand);margin:6px 0}
+.salary-vals{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted)}
+.results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:10px}
+.results-count{font-size:14px;color:var(--text-muted)}
+.results-count strong{color:var(--text);font-weight:500}
+.sort-sel{border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;background:white;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer;outline:none}
+.sort-sel:focus{border-color:var(--brand)}
+.job-card{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:10px;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;position:relative;user-select:none}
+.job-card:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+.job-card.active{border:2px solid var(--brand);box-shadow:0 0 0 3px rgba(0,87,184,0.08)}
+.job-card.featured{border-color:#E8C040}
+.featured-badge{position:absolute;top:12px;right:12px;background:#F5E100;color:#6B5900;font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px;font-family:'Syne',sans-serif}
+.jc-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.company-logo{width:44px;height:44px;border-radius:9px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;flex-shrink:0}
+.jc-info{flex:1;min-width:0}
+.jc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--brand);margin-bottom:2px;line-height:1.3}
+.jc-company{font-size:13px;color:var(--text);font-weight:500;margin-bottom:4px}
+.jc-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.jc-meta-item{font-size:12px;color:var(--text-muted)}
+.salary-text{color:var(--success);font-weight:500;font-size:13px}
+.bookmark-btn{background:none;border:1px solid var(--border);border-radius:7px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;color:var(--text-muted);font-size:14px;flex-shrink:0}
+.bookmark-btn:hover,.bookmark-btn.saved{color:var(--brand);border-color:var(--brand);background:var(--brand-light)}
+.jc-snippet{font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:10px}
+.jc-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--border);color:var(--text-muted);background:var(--surface);white-space:nowrap}
+.tag.blue{background:#E8F0FB;color:#185FA5;border-color:#B5D4F4}
+.tag.green{background:var(--success-bg);color:var(--success);border-color:#9FD8B5}
+.tag.orange{background:#FFF3E0;color:#E65100;border-color:#FFCC80}
+.tag.purple{background:#F3E8FF;color:#6B21A8;border-color:#C4B5FD}
+.posted-chip{font-size:12px;color:var(--text-muted);white-space:nowrap}
+.easy-apply-btn{background:var(--brand);color:white;border:none;border-radius:7px;padding:7px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s}
+.easy-apply-btn:hover{background:var(--brand-dark)}
+.apply-btn{background:white;color:var(--brand);border:1.5px solid var(--brand);border-radius:7px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.apply-btn:hover{background:var(--brand-light)}
+.pagination{display:flex;gap:5px;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+.pg-btn{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer;background:white;color:var(--text);transition:all 0.15s;padding:0 10px;font-family:'DM Sans',sans-serif}
+.pg-btn.active{background:var(--brand);color:white;border-color:var(--brand)}
+.pg-btn:hover:not(.active){background:var(--brand-light);border-color:var(--brand);color:var(--brand)}
+.pg-btn.disabled{opacity:0.4;cursor:not-allowed}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.visible{display:flex}
+.modal{background:white;border-radius:var(--radius-lg);padding:1.75rem;max-width:460px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.15);position:relative;max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--border);border-radius:7px;width:30px;height:30px;cursor:pointer;color:var(--text-muted);font-size:16px}
+.modal h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:4px}
+.modal p{font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.6}
+.form-group{margin-bottom:0.9rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+.form-group input,.form-group textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color 0.15s}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--brand)}
+.form-group textarea{resize:vertical;min-height:70px;line-height:1.5}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;cursor:pointer;position:relative;transition:all 0.15s;margin-bottom:1rem}
+.upload-zone:hover{border-color:var(--brand);background:var(--brand-light)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.modal-btns{display:flex;gap:8px}
+.modal-submit{flex:1;background:var(--brand);color:white;border:none;border-radius:9px;padding:11px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.modal-submit:hover{background:var(--brand-dark)}
+.modal-cancel{background:white;color:var(--text-muted);border:1px solid var(--border);border-radius:9px;padding:10px 18px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.no-results{text-align:center;padding:4rem 2rem;color:var(--text-muted)}
+.no-results h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:#0F1B2D;color:white;padding:12px 24px;border-radius:10px;font-size:14px;z-index:300;transition:transform 0.3s ease;white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+footer{background:white;border-top:1px solid var(--border);padding:2.5rem 2rem 2rem;margin-top:3rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem}
+.footer-brand .logo{display:inline-block;margin-bottom:10px}
+.footer-brand p{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:220px}
+.footer-col h5{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px}
+.footer-col a{display:block;font-size:13px;color:var(--text-muted);text-decoration:none;margin-bottom:6px}
+.footer-col a:hover{color:var(--brand)}
+.footer-bottom{max-width:1200px;margin:1.5rem auto 0;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted)}
+@media(max-width:900px){.container{grid-template-columns:1fr}.sidebar{display:none}.footer-inner{grid-template-columns:1fr 1fr}.search-box{flex-wrap:wrap}.sf{border-right:none;border-bottom:1px solid var(--border)}.sf:last-of-type{border-bottom:none}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="applyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 id="modalTitle">Apply for role</h2>
+    <p id="modalSubtitle">Complete your application below.</p>
+    <div class="form-group"><label>Full name</label><input type="text" placeholder="e.g. Sarah Thompson"/></div>
+    <div class="form-group"><label>Email address</label><input type="email" placeholder="you@email.com"/></div>
+    <div class="form-group"><label>Phone number</label><input type="tel" placeholder="+44 7XXX XXXXXX"/></div>
+    <div class="form-group"><label>Cover note (optional)</label><textarea placeholder="Why are you a great fit?"></textarea></div>
+    <div class="upload-zone"><input type="file" accept=".pdf,.doc,.docx" onchange="handleCvUpload(this)"/><p id="cvLabel">📄 <strong>Upload CV</strong> — PDF or Word</p></div>
+    <div class="modal-btns"><button class="modal-cancel" onclick="closeModal()">Cancel</button><button class="modal-submit" onclick="submitApp()">Submit application 🚀</button></div>
+  </div>
+</div>
+<nav><div class="nav-inner">
+  <a href="index.html" class="logo">UK<em>Jobs</em></a>
+  <div class="nav-links">
+    <a href="index.html">Find jobs</a>
+    <a href="company.html">Companies</a>
+    <a href="employer.html" class="nav-employer">Post a job</a>
+    <a href="signin.html" class="nav-btn">Sign in</a>
+  </div>
+</div></nav>
+<div class="hero"><div class="hero-inner">
+  <p class="hero-kicker">🇬🇧 UKJobs.live</p>
+  <h1 class="hero-heading">Find your next <em>UK role</em></h1>
+  <p class="hero-sub">Technology, Finance and Management jobs across the UK — remote, hybrid and on-site</p>
+  <div class="search-box">
+    <div class="sf">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <div style="flex:1"><label for="kw">Job title or keyword</label><input id="kw" type="text" placeholder="e.g. Software Engineer, Finance Manager"/></div>
+    </div>
+    <div class="sf">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657 13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <div style="flex:1"><label for="loc">Location</label><input id="loc" type="text" placeholder="City or Remote"/></div>
+    </div>
+    <button class="search-btn" onclick="doSearch()">🔍 Search jobs</button>
+  </div>
+  <div class="popular">
+    <span>Popular:</span>
+    <span class="pop-tag" onclick="quickSearch('Software Engineer')">Software Engineer</span>
+    <span class="pop-tag" onclick="quickSearch('Data Scientist')">Data Scientist</span>
+    <span class="pop-tag" onclick="quickSearch('Finance Manager')">Finance Manager</span>
+    <span class="pop-tag" onclick="quickSearch('Product Manager')">Product Manager</span>
+    <span class="pop-tag" onclick="quickSearch('DevOps')">DevOps</span>
+    <span class="pop-tag" onclick="quickSearch('Remote')">Remote only</span>
+    <span class="pop-tag" onclick="quickSearch('Graduate')">Graduate</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>100</strong><span>Live jobs</span></div>
+    <div class="hero-stat"><strong>3 sectors</strong><span>Tech, Finance, Management</span></div>
+    <div class="hero-stat"><strong>Free</strong><span>To apply</span></div>
+  </div>
+</div></div>
+
+<div class="container" id="mainContainer">
+  <aside class="sidebar">
+    <div class="filter-card">
+      <h3>Sector <button onclick="clearFilter('sector')">Clear</button></h3>
+      <div class="filter-opt"><input type="checkbox" id="sec_tech" checked onchange="applyFilters()"><label for="sec_tech">Technology</label><span class="cnt">35</span></div>
+      <div class="filter-opt"><input type="checkbox" id="sec_fin" checked onchange="applyFilters()"><label for="sec_fin">Finance</label><span class="cnt">35</span></div>
+      <div class="filter-opt"><input type="checkbox" id="sec_mgmt" checked onchange="applyFilters()"><label for="sec_mgmt">Management</label><span class="cnt">30</span></div>
+    </div>
+    <div class="filter-card">
+      <h3>Job type <button onclick="clearFilter('type')">Clear</button></h3>
+      <div class="filter-opt"><input type="checkbox" id="type_ft" checked onchange="applyFilters()"><label for="type_ft">Full-time</label><span class="cnt">92</span></div>
+      <div class="filter-opt"><input type="checkbox" id="type_pt" onchange="applyFilters()"><label for="type_pt">Part-time</label><span class="cnt">5</span></div>
+      <div class="filter-opt"><input type="checkbox" id="type_contract" onchange="applyFilters()"><label for="type_contract">Contract</label><span class="cnt">3</span></div>
+    </div>
+    <div class="filter-card">
+      <h3>Work location <button onclick="clearFilter('mode')">Clear</button></h3>
+      <div class="filter-opt"><input type="checkbox" id="mode_remote" checked onchange="applyFilters()"><label for="mode_remote">Remote</label><span class="cnt">18</span></div>
+      <div class="filter-opt"><input type="checkbox" id="mode_hybrid" checked onchange="applyFilters()"><label for="mode_hybrid">Hybrid</label><span class="cnt">68</span></div>
+      <div class="filter-opt"><input type="checkbox" id="mode_onsite" checked onchange="applyFilters()"><label for="mode_onsite">On-site</label><span class="cnt">14</span></div>
+    </div>
+    <div class="filter-card">
+      <h3>Min salary</h3>
+      <input type="range" min="0" max="150" value="0" id="salSlider" oninput="updateSal(this.value);applyFilters()" style="width:100%;accent-color:var(--brand);margin:6px 0"/>
+      <div class="salary-vals"><span>£0</span><span id="salDisplay">Any salary</span><span>£150k+</span></div>
+    </div>
+    <div class="filter-card">
+      <h3>Posted <button onclick="clearFilter('date')">Clear</button></h3>
+      <div class="filter-opt"><input type="checkbox" id="date_today" onchange="applyFilters()"><label for="date_today">Today</label><span class="cnt">8</span></div>
+      <div class="filter-opt"><input type="checkbox" id="date_3days" onchange="applyFilters()"><label for="date_3days">Last 3 days</label><span class="cnt">24</span></div>
+      <div class="filter-opt"><input type="checkbox" id="date_week" onchange="applyFilters()"><label for="date_week">Last week</label><span class="cnt">68</span></div>
+    </div>
+  </aside>
+
+  <div id="resultsCol">
+    <div class="results-header">
+      <div class="results-count"><strong id="countNum">100</strong> <span id="countLabel">jobs across the UK</span></div>
+      <select class="sort-sel" id="sortSel" onchange="applyFilters()">
+        <option value="relevant">Most relevant</option>
+        <option value="newest">Date posted (newest)</option>
+        <option value="salary_high">Salary (high to low)</option>
+        <option value="salary_low">Salary (low to high)</option>
+      </select>
+    </div>
+    <div id="jobList"></div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<footer><div class="footer-inner">
+  <div class="footer-brand"><a href="index.html" class="logo">UK<em style="color:var(--accent)">Jobs</em></a><p>The UKs fastest growing job board for Technology, Finance and Management roles.</p></div>
+  <div class="footer-col"><h5>Job seekers</h5><a href="#">Tech jobs</a><a href="#">Finance jobs</a><a href="#">Management jobs</a><a href="#">Remote jobs</a><a href="signin.html">Create account</a></div>
+  <div class="footer-col"><h5>Employers</h5><a href="employer.html">Post a job</a><a href="screening.html">Smart screening</a><a href="employer.html">Pricing</a></div>
+  <div class="footer-col"><h5>Contact</h5><a href="mailto:hello@ukjobs.live">hello@ukjobs.live</a><a href="#">LinkedIn</a><a href="privacy.html">Privacy policy</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 UKJobs.live</span><span>🇬🇧 United Kingdom</span></div>
+</footer>
+
+<script>
+const ALL_JOBS=[
+  {id:1,title:"Senior Software Engineer",company:"HSBC Technology",initials:"HB",color:"#DB0011",bg:"#FFF0F0",location:"London",salary:"£85,000 – £110,000",salaryNum:97500,type:"Full-time",mode:"Hybrid",posted:"Today",sector:"Technology",isNew:true,easyApply:true,featured:true,snippet:"Join HSBC's technology division building next-generation banking platforms used by 40 million UK customers. Work with Python, Kubernetes and AWS at massive scale.",skills:["Python","Kubernetes","AWS","Microservices","SQL"]},
+  {id:2,title:"Data Scientist",company:"Lloyds Banking Group",initials:"LB",color:"#006A4D",bg:"#E8F5EE",location:"London",salary:"£75,000 – £95,000",salaryNum:85000,type:"Full-time",mode:"Hybrid",posted:"Today",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Build ML models detecting fraud and personalising products for 26 million Lloyds customers. Work with Python, Spark and TensorFlow on one of the UKs largest data platforms.",skills:["Python","Machine Learning","Spark","SQL","TensorFlow"]},
+  {id:3,title:"Full Stack Developer",company:"Auto Trader UK",initials:"AT",color:"#FF6600",bg:"#FFF3E0",location:"Manchester",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Auto Trader is the UKs largest digital automotive marketplace. Build features used by 500000 car buyers every day with React, Node.js and TypeScript.",skills:["React","Node.js","TypeScript","AWS","PostgreSQL"]},
+  {id:4,title:"DevOps Engineer",company:"Sage Group",initials:"SG",color:"#00B050",bg:"#E8F5EE",location:"Newcastle",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Technology",isNew:true,easyApply:false,featured:false,snippet:"Sage powers accounting for 3 million UK businesses. Own CI/CD pipelines for 40+ microservices using Terraform, Kubernetes and Azure.",skills:["Terraform","Kubernetes","Azure","GitHub Actions","Docker"]},
+  {id:5,title:"Cybersecurity Analyst",company:"BT Group",initials:"BT",color:"#6633CC",bg:"#F3E8FF",location:"London",salary:"£50,000 – £70,000",salaryNum:60000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Protect the UKs largest telco from evolving cyber threats. Join BTs world-class Security Operations Centre monitoring threats 24/7.",skills:["SIEM","Incident Response","Python","Network Security","Splunk"]},
+  {id:6,title:"iOS Developer",company:"Trainline",initials:"TL",color:"#00C4B4",bg:"#E0FAF8",location:"London",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Remote",posted:"2 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Build the Trainline iOS app used by 10 million UK travellers every month. Award-winning 4.8-star app with a world-class mobile engineering team.",skills:["Swift","SwiftUI","iOS","REST APIs","XCTest"]},
+  {id:7,title:"Cloud Architect",company:"Rolls-Royce",initials:"RR",color:"#1A1A2E",bg:"#F0F0F8",location:"Derby",salary:"£90,000 – £120,000",salaryNum:105000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:false,featured:true,snippet:"Define cloud architecture strategy for Rolls-Royces digital transformation. Work on engineering systems powering the worlds most advanced aircraft engines.",skills:["AWS","Azure","Terraform","Enterprise Architecture","Security"]},
+  {id:8,title:"Backend Engineer Payments",company:"Monzo Bank",initials:"MZ",color:"#FF5555",bg:"#FFF5F5",location:"London",salary:"£80,000 – £110,000",salaryNum:95000,type:"Full-time",mode:"Remote",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Build payment systems processing millions of transactions for Monzos 9 million UK customers. Go microservices at scale in a fully remote-friendly engineering culture.",skills:["Go","Microservices","PostgreSQL","Kafka","AWS"]},
+  {id:9,title:"Machine Learning Engineer",company:"BenevolentAI",initials:"BA",color:"#5B21B6",bg:"#EDE9FE",location:"London",salary:"£85,000 – £120,000",salaryNum:102500,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Use AI to discover new medicines. BenevolentAI applies deep learning to drug discovery using PyTorch and graph neural networks.",skills:["Python","PyTorch","Graph Neural Networks","MLOps","Docker"]},
+  {id:10,title:"Data Engineer",company:"Sky",initials:"SK",color:"#0078D4",bg:"#E8F0FB",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Build data pipelines processing billions of viewing events from Skys 23 million European customers using Spark, Kafka and Databricks.",skills:["Apache Spark","Kafka","SQL","Python","Databricks"]},
+  {id:11,title:"Site Reliability Engineer",company:"Ocado Technology",initials:"OC",color:"#E30613",bg:"#FDEDEC",location:"Hatfield",salary:"£75,000 – £100,000",salaryNum:87500,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Keep Ocados robotic warehouse systems running flawlessly. Complex automated systems using Kubernetes, Prometheus and Python.",skills:["Kubernetes","Prometheus","Python","Linux","Terraform"]},
+  {id:12,title:"Frontend Engineer React",company:"Cazoo",initials:"CZ",color:"#00A0DC",bg:"#E6F6FD",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Remote",posted:"5 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Build the digital car buying experience for hundreds of thousands of UK consumers. Fast-paced remote team using React, TypeScript and Next.js.",skills:["React","TypeScript","Next.js","GraphQL","Jest"]},
+  {id:13,title:"Android Developer",company:"Deliveroo",initials:"DV",color:"#00CCBC",bg:"#E0FAF8",location:"London",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Build the Deliveroo Android app used by millions of UK customers. One of the UKs most-downloaded apps shipping features weekly with Kotlin and Jetpack Compose.",skills:["Kotlin","Android","Jetpack Compose","REST APIs","Unit Testing"]},
+  {id:14,title:"QA Automation Engineer",company:"Bet365",initials:"B3",color:"#00A651",bg:"#E8F5EE",location:"Stoke-on-Trent",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Ensure quality of one of the worlds largest gambling platforms processing 3 billion bets annually. Python, Selenium and Cypress.",skills:["Selenium","Python","Cypress","CI/CD","API Testing"]},
+  {id:15,title:"Graduate Software Developer",company:"Kainos",initials:"KN",color:"#004B87",bg:"#E8F0FB",location:"Belfast",salary:"£28,000 – £35,000",salaryNum:31500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Start your tech career at Kainos. Structured 2-year graduate programme on digital government services used by millions of UK citizens.",skills:["Java","Python","JavaScript","Agile","Git"]},
+  {id:16,title:"Software Engineer Platform",company:"Wise",initials:"WS",color:"#00B9FF",bg:"#E6F8FF",location:"London",salary:"£70,000 – £95,000",salaryNum:82500,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Wise moves money for 16 million people worldwide. Build infrastructure powering instant low-cost international transfers using Java, Kafka and AWS.",skills:["Java","Kafka","AWS","Microservices","PostgreSQL"]},
+  {id:17,title:"Principal Engineer",company:"Just Eat",initials:"JE",color:"#FF8000",bg:"#FFF3E0",location:"London",salary:"£110,000 – £140,000",salaryNum:125000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:false,featured:true,snippet:"Shape engineering strategy at one of Europes largest food platforms. Lead architecture across 8 engineering squads and mentor senior engineers.",skills:["System Design","Java","AWS","Engineering Leadership","Architecture"]},
+  {id:18,title:"Security Engineer",company:"Arm Holdings",initials:"AR",color:"#0091BD",bg:"#E6F4FA",location:"Cambridge",salary:"£75,000 – £100,000",salaryNum:87500,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Protect Arm chip designs used in 95% of smartphones. Work on hardware security, secure boot and cryptographic implementations for billions of devices.",skills:["Security","Cryptography","C","Python","Embedded Systems"]},
+  {id:19,title:"Data Analyst",company:"Zoopla",initials:"ZP",color:"#8A2BE2",bg:"#F3E8FF",location:"London",salary:"£40,000 – £55,000",salaryNum:47500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Turn data into insight at the UKs second largest property portal serving 50 million monthly property searches.",skills:["SQL","Python","Tableau","dbt","Google Analytics"]},
+  {id:20,title:"Penetration Tester",company:"NCSC GCHQ",initials:"GC",color:"#003087",bg:"#E8F0FB",location:"Cheltenham",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"On-site",posted:"6 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Protect the UK from the most sophisticated cyber threats. Join NCSCs world-class red team conducting penetration tests on critical national infrastructure.",skills:["Penetration Testing","Python","Network Security","Reverse Engineering","OSCP"]},
+  {id:21,title:"Platform Engineer",company:"Babylon Health",initials:"BB",color:"#2D6A4F",bg:"#E8F5EE",location:"London",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Remote",posted:"2 days ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Build the developer platform powering AI healthcare used by millions globally. Kubernetes, Terraform and GitHub Actions.",skills:["Kubernetes","Terraform","Python","AWS","GitHub Actions"]},
+  {id:22,title:"Tech Lead Mobile",company:"Nationwide",initials:"NW",color:"#0047AB",bg:"#E8F0FB",location:"Swindon",salary:"£80,000 – £105,000",salaryNum:92500,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Lead mobile engineering for the Nationwide app used by 17 million members. Own technical quality across iOS and Android squads.",skills:["iOS","Android","Swift","Kotlin","Architecture"]},
+  {id:23,title:"Software Engineer Search",company:"ASOS",initials:"AS",color:"#FF3399",bg:"#FFF0F7",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Power search and discovery for 27 million ASOS customers globally. Build Elasticsearch ranking and personalisation systems.",skills:["Elasticsearch","Python","AWS","Java","Personalisation"]},
+  {id:24,title:"Engineering Manager",company:"Experian",initials:"EX",color:"#E2001A",bg:"#FDEDEC",location:"Nottingham",salary:"£90,000 – £120,000",salaryNum:105000,type:"Full-time",mode:"Hybrid",posted:"6 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Lead a team of 8 engineers building Experians consumer credit products used by 10 million UK customers.",skills:["Engineering Leadership","Java","AWS","Agile","System Design"]},
+  {id:25,title:"Blockchain Developer",company:"ConsenSys",initials:"CN",color:"#3C3C3D",bg:"#F5F5F5",location:"London",salary:"£80,000 – £110,000",salaryNum:95000,type:"Full-time",mode:"Remote",posted:"5 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Build decentralised applications on Ethereum. Work on smart contracts, DeFi protocols and Web3 tooling used by millions of developers.",skills:["Solidity","Ethereum","TypeScript","Web3.js","Smart Contracts"]},
+  {id:26,title:"AI Engineer",company:"Faculty AI",initials:"FA",color:"#0057B8",bg:"#E8F0FB",location:"London",salary:"£75,000 – £100,000",salaryNum:87500,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Apply AI to real-world problems for government and enterprise clients. Faculty is the UKs leading AI company working on NLP, computer vision and forecasting.",skills:["Python","NLP","Computer Vision","PyTorch","MLOps"]},
+  {id:27,title:"Product Manager Platform",company:"Kingfisher",initials:"KF",color:"#FF6900",bg:"#FFF3E0",location:"London",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Lead platform product strategy for B and Q and Screwfix serving 6 million monthly shoppers. Own the roadmap from discovery to delivery.",skills:["Product Strategy","Agile","SQL","A/B Testing","UX"]},
+  {id:28,title:"UX Designer",company:"Monzo",initials:"MZ",color:"#FF5555",bg:"#FFF5F5",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Remote",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Design intuitive experiences for 9 million Monzo customers. Own end-to-end design for savings and investments from user research to pixel-perfect UI.",skills:["Figma","User Research","Design Systems","Prototyping","Accessibility"]},
+  {id:29,title:"Scrum Master",company:"BT Digital",initials:"BT",color:"#6633CC",bg:"#F3E8FF",location:"London",salary:"£50,000 – £65,000",salaryNum:57500,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Drive agile delivery across 3 squads building BTs digital customer experience. Coach teams and help engineering ship faster.",skills:["Scrum","Agile","Jira","Confluence","Coaching"]},
+  {id:30,title:"Technical Architect",company:"NHS Digital",initials:"NH",color:"#005EB8",bg:"#E8F0FB",location:"Leeds",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Shape architecture of NHS digital services used by 56 million patients. Design secure healthcare systems on Azure with a mission-driven team.",skills:["Azure","Architecture","HL7 FHIR","Security","Python"]},
+  {id:31,title:"Software Engineer Go",company:"Revolut",initials:"RV",color:"#191C20",bg:"#F5F7FA",location:"London",salary:"£80,000 – £110,000",salaryNum:95000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Build the financial infrastructure powering Revolut for 40 million customers. Go microservices and event-driven architecture.",skills:["Go","Microservices","Kafka","PostgreSQL","gRPC"]},
+  {id:32,title:"Data Platform Engineer",company:"Tesco Technology",initials:"TS",color:"#00539F",bg:"#E8F0FB",location:"Welwyn Garden City",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Technology",isNew:true,easyApply:true,featured:false,snippet:"Power data analytics for the UKs largest retailer. Build and scale Tescos data platform processing data from 20 million Clubcard members.",skills:["BigQuery","dbt","Python","Airflow","SQL"]},
+  {id:33,title:"React Native Developer",company:"Pret a Manger",initials:"PM",color:"#B5323C",bg:"#FEF2F2",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Build the Pret app used by 2 million loyalty members. Order-ahead, loyalty rewards and personalisation for one of the UKs best-loved brands.",skills:["React Native","TypeScript","iOS","Android","REST APIs"]},
+  {id:34,title:"Network Engineer",company:"Virgin Media O2",initials:"VM",color:"#CC0000",bg:"#FDEDEC",location:"Hook Hampshire",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Technology",isNew:false,easyApply:false,featured:false,snippet:"Design and maintain core network infrastructure serving 46 million Virgin Media O2 customers. CCNP-level work on IP, MPLS and 5G.",skills:["CCNP","IP Networking","MPLS","5G","Python"]},
+  {id:35,title:"Software Engineer Python",company:"Funding Circle",initials:"FC",color:"#E91E63",bg:"#FCE4EC",location:"London",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Remote",posted:"5 days ago",sector:"Technology",isNew:false,easyApply:true,featured:false,snippet:"Help 130000 UK small businesses access finance. Build the lending platform that has deployed 12 billion in loans using Python, Django and AWS.",skills:["Python","Django","AWS","PostgreSQL","Celery"]},
+  {id:36,title:"Investment Banking Analyst",company:"Barclays",initials:"BC",color:"#00AEEF",bg:"#E6F7FE",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"On-site",posted:"Today",sector:"Finance",isNew:true,easyApply:false,featured:true,snippet:"Join Barclays Investment Bank covering M and A, ECM and DCM transactions. Work on live deals, build financial models and advise FTSE 100 clients.",skills:["Financial Modelling","Excel","M&A","DCM","Bloomberg"]},
+  {id:37,title:"Financial Analyst",company:"Goldman Sachs",initials:"GS",color:"#2C2C2C",bg:"#F5F5F5",location:"London",salary:"£60,000 – £85,000",salaryNum:72500,type:"Full-time",mode:"On-site",posted:"Today",sector:"Finance",isNew:true,easyApply:false,featured:false,snippet:"Build and maintain financial models for Goldmans equities and fixed income divisions. Analytical support for front-office traders.",skills:["Financial Modelling","Python","SQL","Bloomberg","Excel"]},
+  {id:38,title:"Risk Analyst",company:"HSBC",initials:"HB",color:"#DB0011",bg:"#FFF0F0",location:"London",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Finance",isNew:true,easyApply:true,featured:false,snippet:"Manage credit and market risk for HSBCs UK retail banking book. Model risk exposures and produce regulatory reports.",skills:["Risk Management","Excel","Python","VBA","Basel III"]},
+  {id:39,title:"Quantitative Analyst",company:"Man Group",initials:"MG",color:"#1B365D",bg:"#E8EEF8",location:"London",salary:"£90,000 – £130,000",salaryNum:110000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Finance",isNew:true,easyApply:false,featured:false,snippet:"Develop systematic trading strategies at one of the worlds largest hedge funds. Apply statistical methods and ML to global markets.",skills:["Python","C++","Statistics","Machine Learning","Quantitative Finance"]},
+  {id:40,title:"Finance Business Partner",company:"Unilever",initials:"UL",color:"#1F5FA6",bg:"#E8F0FB",location:"London",salary:"£55,000 – £70,000",salaryNum:62500,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Partner with Unilevers brand teams providing financial insight on 5bn UK turnover. Drive budgeting, forecasting and commercial decisions.",skills:["FP&A","SAP","Excel","Stakeholder Management","CIMA"]},
+  {id:41,title:"Treasury Analyst",company:"BP",initials:"BP",color:"#007A33",bg:"#E8F5EE",location:"London",salary:"£50,000 – £65,000",salaryNum:57500,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Manage global cash flows and FX exposures for one of the worlds largest energy companies. Support Treasury handling 10bn in daily transactions.",skills:["Treasury","FX","Cash Management","Bloomberg","Excel"]},
+  {id:42,title:"Compliance Officer",company:"Fidelity International",initials:"FI",color:"#8B0000",bg:"#FEF2F2",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Ensure Fidelitys 400bn AUM business meets FCA and MiFID II requirements. Advise investment teams and build compliance monitoring.",skills:["FCA Regulations","MiFID II","Compliance","Risk","Financial Services"]},
+  {id:43,title:"Credit Risk Manager",company:"Santander UK",initials:"SN",color:"#EC0000",bg:"#FEF2F2",location:"London",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Own credit risk models for Santanders 60bn UK retail mortgage book. Lead IRB models and engage with PRA and FCA regulators.",skills:["Credit Risk","SAS","Python","IRB Models","Basel IV"]},
+  {id:44,title:"Fund Accountant",company:"BlackRock",initials:"BR",color:"#000000",bg:"#F5F5F5",location:"Edinburgh",salary:"£35,000 – £50,000",salaryNum:42500,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Support BlackRocks 3 trillion AUM with accurate fund accounting, NAV calculations and investor reporting across equities and bonds.",skills:["Fund Accounting","NAV","Bloomberg","Excel","AIFMD"]},
+  {id:45,title:"Audit Manager",company:"Deloitte",initials:"DT",color:"#86BC25",bg:"#F5FBE8",location:"London",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Lead audit engagements for FTSE 100 and mid-market clients. Manage teams of 5-10 and build long-term client relationships.",skills:["Audit","IFRS","ACA/ACCA","Risk","Financial Reporting"]},
+  {id:46,title:"Tax Consultant",company:"PwC",initials:"PW",color:"#D04A02",bg:"#FFF0E8",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Advise FTSE 100 companies on complex UK and international tax matters. Work across corporate tax, transfer pricing and M&A.",skills:["Corporation Tax","Transfer Pricing","M&A Tax","HMRC","Excel"]},
+  {id:47,title:"Private Equity Associate",company:"CVC Capital Partners",initials:"CV",color:"#003366",bg:"#E8EEF8",location:"London",salary:"£80,000 – £120,000",salaryNum:100000,type:"Full-time",mode:"On-site",posted:"5 days ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Execute buyout investments at one of Europes largest private equity firms with 175bn AUM. Source deals and conduct due diligence.",skills:["LBO Modelling","Due Diligence","M&A","Excel","Bloomberg"]},
+  {id:48,title:"Mortgage Advisor",company:"Nationwide",initials:"NW",color:"#0047AB",bg:"#E8F0FB",location:"Birmingham",salary:"£30,000 – £45,000",salaryNum:37500,type:"Full-time",mode:"Hybrid",posted:"6 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Help Nationwide members find the right mortgage. CeMAP-qualified guidance and long-term relationships with 3 million mortgage customers.",skills:["CeMAP","Mortgage Advice","Customer Service","Regulatory","Sales"]},
+  {id:49,title:"FP and A Manager",company:"Rolls-Royce",initials:"RR",color:"#1A1A2E",bg:"#F0F0F8",location:"Derby",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"Hybrid",posted:"6 days ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Lead financial planning for Rolls-Royces Civil Aerospace division with 8bn annual revenue. Drive the annual budget cycle and strategic planning.",skills:["FP&A","SAP","Excel","Financial Modelling","Stakeholder Management"]},
+  {id:50,title:"Equity Research Analyst",company:"Jefferies",initials:"JF",color:"#003087",bg:"#E8F0FB",location:"London",salary:"£65,000 – £90,000",salaryNum:77500,type:"Full-time",mode:"On-site",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Cover UK mid-cap equities in Technology and Media. Produce initiating coverage and earnings notes for institutional investors.",skills:["Equity Research","Financial Modelling","Bloomberg","Excel","Sector Knowledge"]},
+  {id:51,title:"AML Analyst",company:"Lloyds Bank",initials:"LB",color:"#006A4D",bg:"#E8F5EE",location:"London",salary:"£35,000 – £50,000",salaryNum:42500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Protect Lloyds from financial crime. Investigate suspicious activity reports and apply AML regulations to one of the UKs largest banks.",skills:["AML","KYC","Sanctions","MLRO","Financial Crime"]},
+  {id:52,title:"Pension Scheme Manager",company:"Legal and General",initials:"LG",color:"#00823E",bg:"#E8F5EE",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Manage defined benefit pension schemes with 250bn assets for institutional clients. Ensure compliance, investment governance and member outcomes.",skills:["Pensions","DB Schemes","Actuarial","Trustee Governance","Regulations"]},
+  {id:53,title:"Actuarial Analyst",company:"Aviva",initials:"AV",color:"#004B87",bg:"#E8F0FB",location:"Norwich",salary:"£35,000 – £50,000",salaryNum:42500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Support Avivas actuarial function for the UKs largest insurer. Work on reserving, pricing and capital modelling using R and Excel.",skills:["Actuarial","R","Excel","Solvency II","Statistical Modelling"]},
+  {id:54,title:"Corporate Finance Executive",company:"KPMG",initials:"KP",color:"#00338D",bg:"#E8F0FB",location:"London",salary:"£50,000 – £70,000",salaryNum:60000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Finance",isNew:true,easyApply:true,featured:false,snippet:"Work on M and A, IPOs and restructuring at KPMGs top-ranked corporate finance team. Build financial models and run due diligence.",skills:["M&A","LBO Modelling","Due Diligence","IFRS","Excel"]},
+  {id:55,title:"Forex Trader",company:"IG Group",initials:"IG",color:"#FF6B00",bg:"#FFF3E0",location:"London",salary:"£55,000 – £90,000",salaryNum:72500,type:"Full-time",mode:"On-site",posted:"3 days ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Execute FX and CFD trades for IGs 1bn daily trading volume. Manage risk and develop market-making strategies across G10 currency pairs.",skills:["FX Trading","Risk Management","Bloomberg","Reuters Eikon","Market Making"]},
+  {id:56,title:"Insurance Underwriter",company:"Zurich Insurance",initials:"ZU",color:"#1B4F8A",bg:"#E8F0FB",location:"London",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Underwrite commercial property and liability risks for mid-market UK businesses. Build broker relationships and grow a profitable book.",skills:["Commercial Underwriting","Risk Assessment","Negotiation","Actuarial","Lloyds Market"]},
+  {id:57,title:"Wealth Manager",company:"St James Place",initials:"SJ",color:"#003366",bg:"#E8EEF8",location:"Manchester",salary:"£50,000 – £80,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Provide holistic financial planning advice to high-net-worth clients. Build a client bank and manage investment portfolios.",skills:["Wealth Management","CFP","Investment Planning","IHT","Pensions"]},
+  {id:58,title:"Head of Finance",company:"Cazoo",initials:"CZ",color:"#00A0DC",bg:"#E6F6FD",location:"London",salary:"£100,000 – £130,000",salaryNum:115000,type:"Full-time",mode:"Hybrid",posted:"6 days ago",sector:"Finance",isNew:false,easyApply:false,featured:true,snippet:"Lead all finance operations for one of the UKs fastest-growing tech companies. Own reporting, FP and A, statutory accounts and investor relations.",skills:["ACA/ACCA","FP&A","Financial Reporting","M&A","Leadership"]},
+  {id:59,title:"Structured Finance Analyst",company:"NatWest Markets",initials:"NM",color:"#3E0097",bg:"#F3E8FF",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Structure and execute securitisation, CLO and ABS transactions for NatWests debt capital markets team.",skills:["Structured Finance","ABS","Securitisation","Excel","Financial Modelling"]},
+  {id:60,title:"Financial Controller",company:"easyJet",initials:"EJ",color:"#FF6600",bg:"#FFF3E0",location:"Luton",salary:"£75,000 – £95,000",salaryNum:85000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Own financial control for easyJets UK operations with 4bn annual revenue. Lead month-end close and statutory reporting.",skills:["Financial Control","IFRS","Oracle","SOX","ACA/ACCA"]},
+  {id:61,title:"Internal Auditor",company:"Vodafone",initials:"VF",color:"#E60000",bg:"#FEF2F2",location:"London",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Finance",isNew:true,easyApply:true,featured:false,snippet:"Provide independent assurance across Vodafones UK business with 6bn annual revenue. Lead audit fieldwork and present to senior management.",skills:["Internal Audit","Risk","Controls","CISA","Financial Services"]},
+  {id:62,title:"Fintech Product Manager",company:"Starling Bank",initials:"ST",color:"#6200EA",bg:"#EDE9FE",location:"London",salary:"£75,000 – £95,000",salaryNum:85000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Own product strategy for Starlings business banking vertical serving 400000 SMEs. Define roadmap and ship features that help UK businesses grow.",skills:["Product Management","Fintech","Agile","SQL","Banking"]},
+  {id:63,title:"ACA Trainee Accountant",company:"EY",initials:"EY",color:"#2E2E2E",bg:"#F5F5F5",location:"London",salary:"£28,000 – £38,000",salaryNum:33000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Start your chartered accountancy career at EY. Gain ACA qualification while working on audits for FTSE 100 companies.",skills:["ACA Training","Audit","Excel","Financial Reporting","IFRS"]},
+  {id:64,title:"Payroll Manager",company:"Capita",initials:"CA",color:"#003B71",bg:"#E8F0FB",location:"Birmingham",salary:"£40,000 – £55,000",salaryNum:47500,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Lead payroll operations for Capitas 50000-employee UK workforce. Own accuracy, HMRC compliance and manage a team of 6 payroll specialists.",skills:["Payroll","ADP","SAP","HMRC","CIPP"]},
+  {id:65,title:"Credit Analyst",company:"Close Brothers",initials:"CB",color:"#003366",bg:"#E8EEF8",location:"London",salary:"£40,000 – £58,000",salaryNum:49000,type:"Full-time",mode:"Hybrid",posted:"6 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Assess credit applications for Close Brothers specialist lending across motor finance, property and commercial lending.",skills:["Credit Analysis","Financial Modelling","Excel","Lending","Risk"]},
+  {id:66,title:"Capital Markets Associate",company:"Rothschild and Co",initials:"RC",color:"#333333",bg:"#F5F5F5",location:"London",salary:"£70,000 – £95,000",salaryNum:82500,type:"Full-time",mode:"On-site",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:false,featured:false,snippet:"Execute equity and debt capital markets transactions for Rothschilds global advisory team. Work on IPOs and high-yield bond issuances.",skills:["ECM","DCM","Financial Modelling","Excel","Bloomberg"]},
+  {id:67,title:"Management Accountant",company:"NHS Trust",initials:"NH",color:"#005EB8",bg:"#E8F0FB",location:"Leeds",salary:"£35,000 – £48,000",salaryNum:41500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Provide management accounting support to NHS clinical and operational teams. Produce monthly accounts and variance analysis.",skills:["Management Accounting","NHS Finance","Excel","Budgeting","CIMA"]},
+  {id:68,title:"Derivatives Analyst",company:"Deutsche Bank",initials:"DB",color:"#0018A8",bg:"#E8EEF8",location:"London",salary:"£55,000 – £80,000",salaryNum:67500,type:"Full-time",mode:"On-site",posted:"2 days ago",sector:"Finance",isNew:true,easyApply:false,featured:false,snippet:"Value and risk-manage interest rate and FX derivatives for Deutsche Banks Markets division. Work alongside traders on pricing strategies.",skills:["Derivatives","Bloomberg","Python","Risk Management","ISDA"]},
+  {id:69,title:"Sustainability Finance Analyst",company:"Schroders",initials:"SC",color:"#00704A",bg:"#E8F5EE",location:"London",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Integrate ESG factors into Schroders 700bn investment process. Assess climate risk and develop sustainability reporting.",skills:["ESG","Sustainability","Financial Analysis","TCFD","Engagement"]},
+  {id:70,title:"Bookkeeper",company:"Hays",initials:"HY",color:"#00A3E0",bg:"#E6F7FE",location:"Edinburgh",salary:"£25,000 – £35,000",salaryNum:30000,type:"Full-time",mode:"On-site",posted:"4 days ago",sector:"Finance",isNew:false,easyApply:true,featured:false,snippet:"Maintain accurate financial records for a portfolio of SME clients. Purchase and sales ledger, bank reconciliations and VAT returns.",skills:["Xero","QuickBooks","Bookkeeping","VAT","Excel"]},
+  {id:71,title:"Operations Director",company:"Amazon UK",initials:"AZ",color:"#FF9900",bg:"#FFF8E6",location:"London",salary:"£110,000 – £150,000",salaryNum:130000,type:"Full-time",mode:"Hybrid",posted:"Today",sector:"Management",isNew:true,easyApply:false,featured:true,snippet:"Lead operations across Amazons UK fulfilment network processing 3 million daily orders. Own P and L and lead 500+ team members.",skills:["Operations","P&L Management","Lean","Six Sigma","Leadership"]},
+  {id:72,title:"HR Director",company:"Vodafone UK",initials:"VF",color:"#E60000",bg:"#FEF2F2",location:"London",salary:"£100,000 – £130,000",salaryNum:115000,type:"Full-time",mode:"Hybrid",posted:"Today",sector:"Management",isNew:true,easyApply:false,featured:false,snippet:"Lead people strategy for Vodafones 13000-person UK workforce. Drive talent acquisition, culture and organisational design.",skills:["HR Strategy","Talent Management","CIPD","Change Management","Leadership"]},
+  {id:73,title:"Marketing Director",company:"Tesco",initials:"TS",color:"#00539F",bg:"#E8F0FB",location:"Welwyn Garden City",salary:"£100,000 – £135,000",salaryNum:117500,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Management",isNew:true,easyApply:false,featured:false,snippet:"Lead marketing strategy for Tescos 50bn UK business. Own brand, media, CRM and loyalty for 20 million Clubcard members.",skills:["Marketing Strategy","Brand Management","CRM","Digital Marketing","P&L"]},
+  {id:74,title:"Supply Chain Manager",company:"Diageo",initials:"DG",color:"#C8102E",bg:"#FEF2F2",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"1 day ago",sector:"Management",isNew:true,easyApply:true,featured:false,snippet:"Manage end-to-end supply chain for Diageos UK spirits portfolio including Johnnie Walker and Guinness.",skills:["Supply Chain","SAP","Procurement","Logistics","APICS"]},
+  {id:75,title:"Customer Success Manager",company:"Salesforce",initials:"SF",color:"#00A1E0",bg:"#E6F7FE",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Drive adoption and retention for Salesforces enterprise UK customers. Own a portfolio of 5M ARR and grow accounts through value delivery.",skills:["Customer Success","CRM","Salesforce","Stakeholder Management","SaaS"]},
+  {id:76,title:"Project Manager Digital",company:"Accenture",initials:"AC",color:"#A100FF",bg:"#F5E6FF",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Deliver complex digital transformation programmes for Accentures FTSE 100 clients. Lead cross-functional teams and manage 10M+ budgets.",skills:["Project Management","PMP","Agile","Stakeholder Management","Change Management"]},
+  {id:77,title:"General Manager Hotel",company:"Premier Inn",initials:"PI",color:"#551A8B",bg:"#F3E8FF",location:"Manchester",salary:"£45,000 – £65,000",salaryNum:55000,type:"Full-time",mode:"On-site",posted:"3 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Lead all operations for a Premier Inn property with 200+ rooms. Own P and L, deliver exceptional guest experiences and manage a 40-person team.",skills:["Hotel Management","P&L","Team Leadership","Revenue Management","Guest Experience"]},
+  {id:78,title:"Sales Director",company:"Oracle UK",initials:"OR",color:"#C74634",bg:"#FEF2F2",location:"London",salary:"£120,000 – £180,000",salaryNum:150000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Management",isNew:false,easyApply:false,featured:true,snippet:"Lead Oracles enterprise sales team covering FTSE 100 accounts. Own 50M+ revenue target and grow Oracle Cloud adoption across the UK.",skills:["Enterprise Sales","SaaS","Cloud","C-Suite Engagement","Revenue Leadership"]},
+  {id:79,title:"Change Manager",company:"Lloyds Banking Group",initials:"LB",color:"#006A4D",bg:"#E8F5EE",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Lead organisational change for Lloyds digital transformation. Develop change impact assessments, communications and training plans.",skills:["Change Management","PROSCI","Stakeholder Engagement","Communications","Agile"]},
+  {id:80,title:"Programme Director",company:"NHS England",initials:"NH",color:"#005EB8",bg:"#E8F0FB",location:"Leeds",salary:"£80,000 – £105,000",salaryNum:92500,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Management",isNew:false,easyApply:false,featured:false,snippet:"Lead NHS Englands digital health transformation programme improving care for 56 million patients. Own delivery of 50M programme.",skills:["Programme Management","MSP","NHS","Digital Health","Leadership"]},
+  {id:81,title:"Brand Manager",company:"Unilever",initials:"UL",color:"#1F5FA6",bg:"#E8F0FB",location:"London",salary:"£45,000 – £60,000",salaryNum:52500,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Own strategy and P and L for a 200M Unilever brand. Drive innovation and retailer partnerships to grow market share in UK personal care.",skills:["Brand Management","P&L","Marketing","Retail","Innovation"]},
+  {id:82,title:"Logistics Manager",company:"DHL UK",initials:"DH",color:"#D40511",bg:"#FEF2F2",location:"Birmingham",salary:"£45,000 – £60,000",salaryNum:52500,type:"Full-time",mode:"On-site",posted:"5 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Manage DHLs Midlands distribution hub processing 100000 daily parcels. Lead 80 warehouse staff and drive on-time delivery KPIs.",skills:["Logistics","Warehouse Management","WMS","KPI Management","Team Leadership"]},
+  {id:83,title:"IT Project Manager",company:"Capgemini",initials:"CG",color:"#0070AD",bg:"#E6F4FD",location:"London",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"6 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Deliver IT infrastructure and cloud migration projects for Capgeminis UK government and financial services clients.",skills:["IT Project Management","PRINCE2","Cloud","Agile","Stakeholder Management"]},
+  {id:84,title:"Retail Area Manager",company:"Marks and Spencer",initials:"MS",color:"#000000",bg:"#F5F5F5",location:"London",salary:"£45,000 – £60,000",salaryNum:52500,type:"Full-time",mode:"On-site",posted:"6 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Oversee 8 M and S stores across London with 120M+ combined turnover. Lead store managers and drive exceptional customer experience.",skills:["Retail Management","P&L","Team Leadership","Sales","Visual Merchandising"]},
+  {id:85,title:"Head of Product",company:"Babylon Health",initials:"BB",color:"#2D6A4F",bg:"#E8F5EE",location:"London",salary:"£110,000 – £140,000",salaryNum:125000,type:"Full-time",mode:"Remote",posted:"1 week ago",sector:"Management",isNew:false,easyApply:false,featured:true,snippet:"Define product vision and lead 12 Product Managers building AI health tools for millions of patients globally.",skills:["Head of Product","Product Strategy","Healthcare","Team Leadership","OKRs"]},
+  {id:86,title:"Facilities Manager",company:"CBRE",initials:"CB",color:"#003865",bg:"#E8F0FB",location:"London",salary:"£40,000 – £55,000",salaryNum:47500,type:"Full-time",mode:"On-site",posted:"1 week ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Manage facilities for a prestigious London office campus with 5000 occupants. Oversee maintenance, health and safety and catering contracts.",skills:["Facilities Management","IOSH","Contract Management","H&S","Hard Services"]},
+  {id:87,title:"Operations Manager",company:"Ocado",initials:"OC",color:"#E30613",bg:"#FDEDEC",location:"Hatfield",salary:"£50,000 – £70,000",salaryNum:60000,type:"Full-time",mode:"On-site",posted:"1 week ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Run day-to-day operations at Ocados automated warehouse processing 500000 weekly orders. Lead shift managers and own safety standards.",skills:["Operations","Warehouse","Team Leadership","KPIs","Continuous Improvement"]},
+  {id:88,title:"Commercial Manager",company:"National Grid",initials:"NG",color:"#00629B",bg:"#E6F4FD",location:"London",salary:"£65,000 – £85,000",salaryNum:75000,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Management",isNew:true,easyApply:false,featured:false,snippet:"Lead commercial negotiations for National Grids 2bn infrastructure procurement programme. Manage supplier relationships and commercial risk.",skills:["Commercial Management","NEC Contracts","Procurement","Negotiation","Risk Management"]},
+  {id:89,title:"Customer Experience Manager",company:"John Lewis",initials:"JL",color:"#333333",bg:"#F5F5F5",location:"London",salary:"£45,000 – £60,000",salaryNum:52500,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Own in-store and omnichannel customer experience for John Lewis Oxford Street. Lead service standards and drive NPS improvements.",skills:["Customer Experience","NPS","Service Design","Team Leadership","Retail"]},
+  {id:90,title:"Procurement Manager",company:"BAE Systems",initials:"BA",color:"#003087",bg:"#E8F0FB",location:"Preston",salary:"£55,000 – £75,000",salaryNum:65000,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Management",isNew:false,easyApply:false,featured:false,snippet:"Manage strategic procurement for BAEs defence manufacturing supply chain worth 500M annually. Source critical components and manage suppliers.",skills:["Procurement","CIPS","Supply Chain","Defence","Contract Management"]},
+  {id:91,title:"Head of Marketing",company:"Funding Circle",initials:"FC",color:"#E91E63",bg:"#FCE4EC",location:"London",salary:"£90,000 – £120,000",salaryNum:105000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Management",isNew:false,easyApply:false,featured:false,snippet:"Lead marketing for one of the UKs largest SME lenders. Own brand, performance, content and a team of 20 across acquisition and retention.",skills:["Marketing Leadership","Growth","Brand","Performance Marketing","Team Management"]},
+  {id:92,title:"Strategy Manager",company:"Boston Consulting Group",initials:"BC",color:"#00A86B",bg:"#E8F5EE",location:"London",salary:"£90,000 – £120,000",salaryNum:105000,type:"Full-time",mode:"Hybrid",posted:"4 days ago",sector:"Management",isNew:false,easyApply:false,featured:false,snippet:"Solve the UKs most complex business problems for BCGs FTSE 100 clients. Lead workstreams on growth strategy and digital transformation.",skills:["Strategy","Management Consulting","Financial Modelling","PowerPoint","Excel"]},
+  {id:93,title:"People Manager HRBP",company:"Deliveroo",initials:"DV",color:"#00CCBC",bg:"#E0FAF8",location:"London",salary:"£50,000 – £68,000",salaryNum:59000,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Support Deliveroos 12000-person global team leading HRBP services for the Technology division. Drive performance and talent development.",skills:["HRBP","CIPD","Talent Management","Employee Relations","Change Management"]},
+  {id:94,title:"Sales Manager SaaS",company:"Salesforce",initials:"SF",color:"#00A1E0",bg:"#E6F7FE",location:"London",salary:"£70,000 – £100,000",salaryNum:85000,type:"Full-time",mode:"Hybrid",posted:"5 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Lead a team of 6 enterprise AEs growing Salesforces UK mid-market revenue. Coach sellers, run QBRs and close strategic deals.",skills:["Sales Leadership","SaaS","CRM","Coaching","Revenue Growth"]},
+  {id:95,title:"Plant Manager",company:"Unilever",initials:"UL",color:"#1F5FA6",bg:"#E8F0FB",location:"Port Sunlight",salary:"£70,000 – £90,000",salaryNum:80000,type:"Full-time",mode:"On-site",posted:"6 days ago",sector:"Management",isNew:false,easyApply:false,featured:false,snippet:"Lead manufacturing operations at Unilevers iconic Port Sunlight factory producing 500 million units annually. Manage 300 employees.",skills:["Manufacturing","Lean Manufacturing","Six Sigma","P&L","Team Leadership"]},
+  {id:96,title:"Account Director Agency",company:"WPP",initials:"WP",color:"#000080",bg:"#E8EEF8",location:"London",salary:"£60,000 – £80,000",salaryNum:70000,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Lead client relationships for WPPs FMCG accounts worth 20M+. Oversee integrated campaigns across digital, TV and social channels.",skills:["Account Management","Integrated Marketing","Client Services","Campaign Management","Media"]},
+  {id:97,title:"Business Development Manager",company:"Microsoft UK",initials:"MS",color:"#00A4EF",bg:"#E6F7FE",location:"London",salary:"£65,000 – £90,000",salaryNum:77500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Drive new business for Microsofts Azure and M365 suite across UK mid-market accounts. Own 10M new ARR quota and develop commercial proposals.",skills:["Business Development","Azure","SaaS","Partner Management","Enterprise Sales"]},
+  {id:98,title:"Transformation Lead",company:"Fujitsu UK",initials:"FJ",color:"#FF0000",bg:"#FEF2F2",location:"London",salary:"£75,000 – £100,000",salaryNum:87500,type:"Full-time",mode:"Hybrid",posted:"1 week ago",sector:"Management",isNew:false,easyApply:false,featured:false,snippet:"Lead digital transformation delivery for Fujitsus UK public sector clients including HMRC and DWP. Manage multi-year multi-million programmes.",skills:["Transformation","PRINCE2","Agile","Public Sector","Stakeholder Management"]},
+  {id:99,title:"Content and SEO Manager",company:"Auto Trader",initials:"AT",color:"#FF6600",bg:"#FFF3E0",location:"Manchester",salary:"£40,000 – £55,000",salaryNum:47500,type:"Full-time",mode:"Hybrid",posted:"2 days ago",sector:"Management",isNew:true,easyApply:true,featured:false,snippet:"Own content strategy and SEO for the UKs largest car marketplace attracting 55 million monthly visits. Drive organic growth and manage a team of 5.",skills:["SEO","Content Strategy","Google Analytics","Ahrefs","Team Management"]},
+  {id:100,title:"Recruitment Manager",company:"NHS England",initials:"NH",color:"#005EB8",bg:"#E8F0FB",location:"London",salary:"£45,000 – £60,000",salaryNum:52500,type:"Full-time",mode:"Hybrid",posted:"3 days ago",sector:"Management",isNew:false,easyApply:true,featured:false,snippet:"Lead recruitment for NHS Englands digital and technology division hiring 200+ roles annually. Own talent acquisition strategy and manage 8 recruiters.",skills:["Recruitment","Talent Acquisition","ATS","Employer Brand","NHS"]},
+];
+const JOBS_PER_PAGE = 10;
+let currentPage = 1;
+let filteredJobs = [...ALL_JOBS];
+let saved = new Set();
+
+function sectorTag(s){
+  const map={Technology:'blue',Finance:'green',Management:'purple'};
+  return `<span class="tag ${map[s]||''}">${s}</span>`;
+}
+function modeTag(m){
+  const map={Remote:'green',Hybrid:'blue','On-site':'orange'};
+  return `<span class="tag ${map[m]||''}">${m}</span>`;
+}
+
+function buildCard(job){
+  const div = document.createElement('div');
+  div.className = 'job-card' + (job.featured ? ' featured' : '');
+  div.onclick = function(){ window.location.href = 'job.html?id=' + job.id; };
+  div.innerHTML = `
+    ${job.featured ? '<div class="featured-badge">⭐ Featured</div>' : ''}
+    <div class="jc-top">
+      <div class="company-logo" style="color:${job.color};background:${job.bg}">${job.initials}</div>
+      <div class="jc-info">
+        <div class="jc-title">${job.title}</div>
+        <div class="jc-company">${job.company}</div>
+        <div class="jc-meta">
+          <span class="jc-meta-item">📍 ${job.location}</span>
+          <span class="salary-text">${job.salary}</span>
+        </div>
+      </div>
+      <button class="bookmark-btn${saved.has(job.id)?' saved':''}" onclick="toggleSave(event,${job.id})" title="Save job">🔖</button>
+    </div>
+    <p class="jc-snippet">${job.snippet}</p>
+    <div class="jc-footer">
+      <div class="tags">
+        ${sectorTag(job.sector)}
+        ${modeTag(job.mode)}
+        <span class="tag blue">${job.type}</span>
+        ${job.skills.slice(0,2).map(s=>`<span class="tag">${s}</span>`).join('')}
+        ${job.isNew?'<span class="tag" style="background:#EAF3DE;color:#3B6D11;border-color:#C0DD97">New</span>':''}
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <span class="posted-chip">🕐 ${job.posted}</span>
+        ${job.easyApply
+          ? `<button class="easy-apply-btn" onclick="openApply(event,${job.id})">⚡ Easy Apply</button>`
+          : `<button class="apply-btn" onclick="openApply(event,${job.id})">Apply</button>`}
+      </div>
+    </div>`;
+  return div;
+}
+
+function renderJobs(){
+  const list = document.getElementById('jobList');
+  list.innerHTML = '';
+  const start = (currentPage - 1) * JOBS_PER_PAGE;
+  const pageJobs = filteredJobs.slice(start, start + JOBS_PER_PAGE);
+  if(pageJobs.length === 0){
+    list.innerHTML = `<div class="no-results"><h3>No jobs found</h3><p>Try adjusting your filters or search terms.</p><button onclick="resetAll()" style="margin-top:1rem;background:var(--brand);color:white;border:none;border-radius:8px;padding:10px 20px;font-size:14px;cursor:pointer;font-family:DM Sans,sans-serif">Clear all filters</button></div>`;
+  } else {
+    pageJobs.forEach(j => list.appendChild(buildCard(j)));
+  }
+  renderPagination();
+  document.getElementById('countNum').textContent = filteredJobs.length;
+}
+
+function renderPagination(){
+  const pg = document.getElementById('pagination');
+  pg.innerHTML = '';
+  const totalPages = Math.ceil(filteredJobs.length / JOBS_PER_PAGE);
+  if(totalPages <= 1) return;
+
+  // Prev
+  const prev = document.createElement('div');
+  prev.className = 'pg-btn' + (currentPage === 1 ? ' disabled' : '');
+  prev.innerHTML = '← Prev';
+  prev.style.padding = '0 12px';
+  if(currentPage > 1) prev.onclick = () => goPage(currentPage - 1);
+  pg.appendChild(prev);
+
+  // Page numbers
+  for(let i = 1; i <= totalPages; i++){
+    if(i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)){
+      const b = document.createElement('div');
+      b.className = 'pg-btn' + (i === currentPage ? ' active' : '');
+      b.textContent = i;
+      b.onclick = (function(page){ return function(){ goPage(page); }; })(i);
+      pg.appendChild(b);
+    } else if(i === currentPage - 3 || i === currentPage + 3){
+      const dots = document.createElement('div');
+      dots.className = 'pg-btn disabled';
+      dots.textContent = '...';
+      pg.appendChild(dots);
+    }
+  }
+
+  // Next
+  const next = document.createElement('div');
+  next.className = 'pg-btn' + (currentPage === totalPages ? ' disabled' : '');
+  next.innerHTML = 'Next →';
+  next.style.padding = '0 12px';
+  if(currentPage < totalPages) next.onclick = () => goPage(currentPage + 1);
+  pg.appendChild(next);
+}
+
+function goPage(n){
+  currentPage = n;
+  renderJobs();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function applyFilters(){
+  const kw = document.getElementById('kw').value.toLowerCase().trim();
+  const loc = document.getElementById('loc').value.toLowerCase().trim();
+  const minSal = parseInt(document.getElementById('salSlider').value) * 1000;
+  const sortVal = document.getElementById('sortSel').value;
+
+  // Sector
+  const sectors = [];
+  if(document.getElementById('sec_tech').checked) sectors.push('Technology');
+  if(document.getElementById('sec_fin').checked) sectors.push('Finance');
+  if(document.getElementById('sec_mgmt').checked) sectors.push('Management');
+
+  // Type
+  const types = [];
+  if(document.getElementById('type_ft').checked) types.push('Full-time');
+  if(document.getElementById('type_pt').checked) types.push('Part-time');
+  if(document.getElementById('type_contract').checked) types.push('Contract');
+
+  // Mode
+  const modes = [];
+  if(document.getElementById('mode_remote').checked) modes.push('Remote');
+  if(document.getElementById('mode_hybrid').checked) modes.push('Hybrid');
+  if(document.getElementById('mode_onsite').checked) modes.push('On-site');
+
+  // Date
+  const dateToday = document.getElementById('date_today').checked;
+  const date3days = document.getElementById('date_3days').checked;
+  const dateWeek = document.getElementById('date_week').checked;
+  const anyDate = !dateToday && !date3days && !dateWeek;
+
+  filteredJobs = ALL_JOBS.filter(j => {
+    // keyword search — title, company, sector, skills, snippet
+    if(kw){
+      const hay = (j.title + ' ' + j.company + ' ' + j.sector + ' ' + j.skills.join(' ') + ' ' + j.snippet).toLowerCase();
+      if(!hay.includes(kw)) return false;
+    }
+    // location
+    if(loc){
+      const jloc = j.location.toLowerCase();
+      if(loc === 'remote'){
+        if(j.mode !== 'Remote') return false;
+      } else {
+        if(!jloc.includes(loc) && j.mode !== 'Remote') return false;
+      }
+    }
+    // sector
+    if(sectors.length > 0 && !sectors.includes(j.sector)) return false;
+    // type
+    if(types.length > 0 && !types.includes(j.type)) return false;
+    // mode
+    if(modes.length > 0 && !modes.includes(j.mode)) return false;
+    // salary
+    if(minSal > 0 && j.salaryNum < minSal) return false;
+    // date
+    if(!anyDate){
+      const todayPosts = ['Today'];
+      const threeDayPosts = ['Today','1 day ago','2 days ago','3 days ago'];
+      const weekPosts = ['Today','1 day ago','2 days ago','3 days ago','4 days ago','5 days ago','6 days ago'];
+      if(dateToday && !todayPosts.includes(j.posted)) return false;
+      else if(!dateToday && date3days && !threeDayPosts.includes(j.posted)) return false;
+      else if(!dateToday && !date3days && dateWeek && !weekPosts.includes(j.posted)) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  if(sortVal === 'salary_high') filteredJobs.sort((a,b) => b.salaryNum - a.salaryNum);
+  else if(sortVal === 'salary_low') filteredJobs.sort((a,b) => a.salaryNum - b.salaryNum);
+  else if(sortVal === 'newest'){
+    const order = ['Today','1 day ago','2 days ago','3 days ago','4 days ago','5 days ago','6 days ago','1 week ago'];
+    filteredJobs.sort((a,b) => order.indexOf(a.posted) - order.indexOf(b.posted));
+  } else {
+    // relevant: featured first
+    filteredJobs.sort((a,b) => (b.featured?1:0)-(a.featured?1:0));
+  }
+
+  // Update label
+  const kwLabel = kw ? ` for "${kw}"` : '';
+  const locLabel = loc ? ` in ${document.getElementById('loc').value}` : ' across the UK';
+  document.getElementById('countLabel').textContent = `jobs${kwLabel}${locLabel}`;
+
+  currentPage = 1;
+  renderJobs();
+}
+
+function doSearch(){ applyFilters(); }
+
+function quickSearch(term){
+  if(term === 'Remote'){
+    document.getElementById('kw').value = '';
+    document.getElementById('loc').value = 'Remote';
+  } else {
+    document.getElementById('kw').value = term;
+    document.getElementById('loc').value = '';
+  }
+  applyFilters();
+  showToast('Showing results for "' + term + '"');
+}
+
+function clearFilter(group){
+  if(group === 'sector'){
+    ['sec_tech','sec_fin','sec_mgmt'].forEach(id => document.getElementById(id).checked = true);
+  } else if(group === 'type'){
+    ['type_ft','type_pt','type_contract'].forEach(id => document.getElementById(id).checked = false);
+    document.getElementById('type_ft').checked = true;
+  } else if(group === 'mode'){
+    ['mode_remote','mode_hybrid','mode_onsite'].forEach(id => document.getElementById(id).checked = true);
+  } else if(group === 'date'){
+    ['date_today','date_3days','date_week'].forEach(id => document.getElementById(id).checked = false);
+  }
+  applyFilters();
+}
+
+function resetAll(){
+  document.getElementById('kw').value = '';
+  document.getElementById('loc').value = '';
+  document.getElementById('salSlider').value = 0;
+  document.getElementById('salDisplay').textContent = 'Any salary';
+  ['sec_tech','sec_fin','sec_mgmt'].forEach(id => document.getElementById(id).checked = true);
+  ['type_ft'].forEach(id => document.getElementById(id).checked = true);
+  ['type_pt','type_contract'].forEach(id => document.getElementById(id).checked = false);
+  ['mode_remote','mode_hybrid','mode_onsite'].forEach(id => document.getElementById(id).checked = true);
+  ['date_today','date_3days','date_week'].forEach(id => document.getElementById(id).checked = false);
+  document.getElementById('sortSel').value = 'relevant';
+  applyFilters();
+}
+
+function updateSal(val){
+  document.getElementById('salDisplay').textContent = val == 0 ? 'Any salary' : '£' + (parseInt(val)*1000).toLocaleString() + '+';
+}
+
+function toggleSave(e, id){
+  e.stopPropagation();
+  if(saved.has(id)){ saved.delete(id); showToast('Removed from saved jobs'); }
+  else { saved.add(id); showToast('🔖 Job saved!'); }
+  // Update just this button
+  const allCards = document.querySelectorAll('.bookmark-btn');
+  allCards.forEach(btn => {
+    if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(id)){
+      btn.classList.toggle('saved', saved.has(id));
+    }
+  });
+}
+
+function openApply(e, id){
+  e.stopPropagation();
+  const job = ALL_JOBS.find(j => j.id === id);
+  document.getElementById('modalTitle').textContent = 'Apply — ' + job.title;
+  document.getElementById('modalSubtitle').textContent = 'Applying to ' + job.company + '. We will send your CV directly to the hiring team.';
+  document.getElementById('applyModal').classList.add('visible');
+}
+function closeModal(){ document.getElementById('applyModal').classList.remove('visible'); }
+function handleCvUpload(input){ if(input.files[0]){ document.getElementById('cvLabel').innerHTML = '<strong style="color:var(--success)">✓ ' + input.files[0].name + '</strong>'; }}
+function submitApp(){ closeModal(); showToast('✅ Application submitted! Good luck 🎉'); }
+function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+window.onclick = function(e){ if(e.target === document.getElementById('applyModal')) closeModal(); };
+
+// INIT
+applyFilters();
+</script>
+
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0F1B2D;color:white;padding:14px 2rem;z-index:999;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 -4px 20px rgba(0,0,0,0.15)">
+  <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:250px">
+    <span style="font-size:20px">🍪</span>
+    <div>
+      <p style="font-size:14px;font-weight:500;margin-bottom:2px;font-family:DM Sans,sans-serif">We use essential cookies only</p>
+      <p style="font-size:12px;color:rgba(255,255,255,0.6);font-family:DM Sans,sans-serif">No tracking, no advertising cookies. Just the basics to keep the site working. <a href="privacy.html" style="color:#90CAF9;text-decoration:underline">Learn more</a></p>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button onclick="acceptCookies()" style="background:#0057B8;color:white;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:DM Sans,sans-serif">Got it ✓</button>
+    <a href="privacy.html" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:9px 16px;font-size:13px;cursor:pointer;font-family:DM Sans,sans-serif;text-decoration:none;display:flex;align-items:center">Privacy Policy</a>
+  </div>
+</div>
+<script>
+function acceptCookies(){
+  localStorage.setItem('cookiesAccepted','true');
+  document.getElementById('cookieBanner').style.display='none';
+}
+window.addEventListener('load',function(){
+  if(!localStorage.getItem('cookiesAccepted')){
+    document.getElementById('cookieBanner').style.display='flex';
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Smart Screening — UKJobs for Employers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#0057B8;--brand-dark:#003F8A;--brand-light:#E8F0FB;--accent:#FF5722;--text:#0F1B2D;--text-muted:#5A6A7E;--border:#DDE3EC;--surface:#F5F7FA;--white:#fff;--success:#1B7D4E;--success-bg:#E8F5EE;--danger:#C0392B;--danger-bg:#FDEDEC;--warning:#B45309;--warning-bg:#FEF3C7;--radius:10px;--radius-lg:16px;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 32px rgba(0,0,0,0.14)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--surface);min-height:100vh}
+nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 2rem;height:60px;display:flex;align-items:center}
+.nav-inner{max-width:1300px;margin:0 auto;width:100%;display:flex;align-items:center;gap:1.5rem}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--brand);letter-spacing:-1px;text-decoration:none}
+.logo em{color:var(--accent);font-style:normal}
+.nav-tag{font-size:12px;background:var(--brand-light);color:var(--brand);padding:4px 12px;border-radius:20px;font-weight:500;border:1px solid #B5D4F4}
+.nav-right{margin-left:auto;display:flex;gap:1rem;align-items:center}
+.nav-right a{font-size:14px;color:var(--text-muted);text-decoration:none}
+.nav-right a:hover{color:var(--brand)}
+.nav-btn{background:var(--brand);color:white!important;padding:7px 18px;border-radius:8px;font-weight:500}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:1300px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:260px 1fr;gap:1.5rem;align-items:start}
+
+/* LEFT SIDEBAR - JOB SELECTOR */
+.job-sidebar{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;position:sticky;top:76px}
+.js-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);background:var(--surface)}
+.js-header h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:700}
+.js-header p{font-size:12px;color:var(--text-muted);margin-top:2px}
+.job-item{padding:1rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;position:relative}
+.job-item:last-child{border-bottom:none}
+.job-item:hover{background:var(--surface)}
+.job-item.active{background:var(--brand-light);border-left:3px solid var(--brand)}
+.ji-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px}
+.ji-meta{font-size:12px;color:var(--text-muted)}
+.ji-badge{position:absolute;top:10px;right:10px;background:var(--brand);color:white;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:'Syne',sans-serif}
+.ji-badge.red{background:var(--danger)}
+.ji-badge.green{background:var(--success)}
+
+/* MAIN CONTENT */
+.main-content{}
+
+/* PAGE HEADER */
+.page-header{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.ph-left h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px}
+.ph-left p{font-size:14px;color:var(--text-muted)}
+.ph-stats{display:flex;gap:1rem;flex-wrap:wrap}
+.ph-stat{text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 18px}
+.ph-stat strong{display:block;font-family:'Syne',sans-serif;font-size:20px;font-weight:800}
+.ph-stat span{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px}
+.ph-stat.green strong{color:var(--success)}
+.ph-stat.red strong{color:var(--danger)}
+.ph-stat.blue strong{color:var(--brand)}
+.ph-stat.orange strong{color:var(--warning)}
+
+/* TABS */
+.tab-row{display:flex;gap:0;border-bottom:1px solid var(--border);background:white;border-radius:var(--radius-lg) var(--radius-lg) 0 0;border:1px solid var(--border);border-bottom:none;overflow:hidden}
+.tab{padding:12px 20px;font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--text-muted);transition:all 0.15s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab.active{color:var(--brand);border-bottom-color:var(--brand);background:var(--brand-light)}
+.tab:hover:not(.active){background:var(--surface)}
+.tab-badge{font-size:11px;background:var(--border);color:var(--text-muted);padding:1px 7px;border-radius:20px;font-weight:600}
+.tab.active .tab-badge{background:var(--brand);color:white}
+
+/* SECTION CARDS */
+.section-card{background:white;border:1px solid var(--border);border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;border-top:none}
+.section-card.standalone{border-radius:var(--radius-lg);border-top:1px solid var(--border)}
+.section-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.section-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.5}
+
+/* FILTER BUILDER */
+.filter-rule{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:relative;transition:border-color 0.15s}
+.filter-rule:hover{border-color:var(--brand)}
+.filter-rule.active-rule{border-color:var(--brand);background:var(--brand-light)}
+.rule-label{font-size:13px;font-weight:500;color:var(--text);min-width:160px}
+.rule-op{border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;background:white;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer;outline:none}
+.rule-op:focus{border-color:var(--brand)}
+.rule-val{border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;background:white;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;min-width:120px;flex:1}
+.rule-val:focus{border-color:var(--brand)}
+.rule-action{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid;cursor:pointer;white-space:nowrap}
+.rule-action.reject{color:var(--danger);border-color:var(--danger);background:var(--danger-bg)}
+.rule-action.warn{color:var(--warning);border-color:#D97706;background:var(--warning-bg)}
+.rule-toggle{width:44px;height:24px;background:var(--border);border-radius:12px;cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0}
+.rule-toggle.on{background:var(--success)}
+.rule-toggle::after{content:'';position:absolute;width:18px;height:18px;background:white;border-radius:50%;top:3px;left:3px;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.rule-toggle.on::after{left:23px}
+.rule-delete{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;padding:2px 6px;border-radius:4px;transition:all 0.15s}
+.rule-delete:hover{background:var(--danger-bg);color:var(--danger)}
+.add-rule-btn{display:flex;align-items:center;gap:6px;background:none;border:1.5px dashed var(--border);border-radius:var(--radius);padding:10px 16px;font-size:13px;color:var(--text-muted);cursor:pointer;width:100%;justify-content:center;transition:all 0.15s;font-family:'DM Sans',sans-serif;margin-top:6px}
+.add-rule-btn:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+
+/* EMAIL PREVIEW */
+.email-preview{background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.ep-header{background:var(--surface);padding:12px 16px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.ep-header strong{color:var(--text)}
+.ep-body{padding:1.5rem}
+.ep-from{display:flex;align-items:center;gap:10px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.ep-avatar{width:36px;height:36px;background:var(--brand);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:'Syne',sans-serif;font-size:14px;flex-shrink:0}
+.ep-from-name{font-size:13px;font-weight:500}
+.ep-from-email{font-size:12px;color:var(--text-muted)}
+.ep-subject{font-size:16px;font-weight:600;color:var(--text);margin-bottom:1rem;font-family:'Syne',sans-serif}
+.ep-content{font-size:13px;color:var(--text-muted);line-height:1.8}
+.ep-content p{margin-bottom:10px}
+.ep-content .highlight{color:var(--text);font-weight:500}
+.ep-banner{background:var(--danger-bg);border:1px solid #E9B4AD;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--danger);margin:1rem 0;display:flex;align-items:center;gap:8px}
+.ep-banner.success{background:var(--success-bg);border-color:#9FD8B5;color:var(--success)}
+.ep-footer{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+.ep-cta{display:inline-block;background:var(--brand);color:white;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;text-decoration:none;margin:10px 0}
+
+/* PHONE SCREENING */
+.question-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:10px;position:relative}
+.question-card:hover{border-color:var(--brand)}
+.q-num{width:26px;height:26px;background:var(--brand);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:'Syne',sans-serif;flex-shrink:0}
+.q-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.q-text{font-size:14px;font-weight:500;flex:1}
+.q-type-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:white;border:1px solid var(--border);color:var(--text-muted);white-space:nowrap}
+.q-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.q-meta-item{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.q-required{font-size:11px;background:var(--danger-bg);color:var(--danger);padding:2px 8px;border-radius:20px;border:1px solid #E9B4AD;font-weight:500}
+.q-optional{font-size:11px;background:var(--surface);color:var(--text-muted);padding:2px 8px;border-radius:20px;border:1px solid var(--border)}
+.q-actions{display:flex;gap:6px;margin-top:10px}
+.q-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text-muted);transition:all 0.15s}
+.q-btn:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+.q-btn.danger:hover{border-color:var(--danger);color:var(--danger);background:var(--danger-bg)}
+.drag-handle{cursor:grab;color:var(--border);font-size:18px;padding:2px 4px;position:absolute;right:12px;top:12px}
+.drag-handle:hover{color:var(--text-muted)}
+
+/* CANDIDATE RESULTS */
+.candidate-row{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.15s}
+.candidate-row:hover{border-color:var(--brand);box-shadow:var(--shadow)}
+.c-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;flex-shrink:0}
+.c-info{flex:1;min-width:0}
+.c-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.c-meta{font-size:12px;color:var(--text-muted);display:flex;gap:10px;flex-wrap:wrap}
+.c-score{text-align:right;flex-shrink:0}
+.c-score-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;line-height:1}
+.c-score-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px}
+.status-badge{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;white-space:nowrap}
+.status-badge.pass{background:var(--success-bg);color:var(--success);border:1px solid #9FD8B5}
+.status-badge.fail{background:var(--danger-bg);color:var(--danger);border:1px solid #E9B4AD}
+.status-badge.review{background:var(--warning-bg);color:var(--warning);border:1px solid #D97706}
+.status-badge.pending{background:var(--surface);color:var(--text-muted);border:1px solid var(--border)}
+.score-bar{height:5px;background:var(--border);border-radius:3px;margin-top:4px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:3px;transition:width 0.5s ease}
+
+/* CANDIDATE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:none;align-items:flex-start;justify-content:flex-end;padding:1rem}
+.modal-overlay.visible{display:flex}
+.candidate-modal{background:white;width:480px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);max-height:calc(100vh - 2rem);overflow-y:auto;animation:slideIn 0.2s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.cm-header{padding:1.5rem;background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start}
+.cm-body{padding:1.5rem}
+.cm-close{background:none;border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-muted);margin-left:auto;flex-shrink:0}
+.cm-close:hover{border-color:var(--brand);color:var(--brand)}
+.qa-item{margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.qa-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.qa-q{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px;display:flex;align-items:flex-start;gap:6px}
+.qa-a{font-size:13px;color:var(--text-muted);line-height:1.6;background:var(--surface);border-radius:8px;padding:10px 12px;border:1px solid var(--border)}
+.qa-score{display:flex;align-items:center;gap:6px;margin-top:6px}
+.qa-score-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.qa-score-fill{height:100%;border-radius:2px}
+.qa-score-text{font-size:12px;font-weight:500;min-width:30px}
+.filter-check{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.filter-check:last-child{border-bottom:none}
+.filter-check .icon{font-size:16px;flex-shrink:0}
+.cm-actions{display:flex;gap:8px;margin-top:1.25rem;flex-wrap:wrap}
+.cm-btn{flex:1;border:none;border-radius:9px;padding:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-width:100px}
+.cm-btn.advance{background:var(--success);color:white}
+.cm-btn.advance:hover{background:#155f3c}
+.cm-btn.reject{background:var(--danger-bg);color:var(--danger);border:1px solid #E9B4AD}
+.cm-btn.reject:hover{background:var(--danger);color:white}
+.cm-btn.phone{background:var(--brand-light);color:var(--brand);border:1px solid #B5D4F4}
+.cm-btn.phone:hover{background:var(--brand);color:white}
+.audio-player{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-top:6px;cursor:pointer;transition:all 0.15s}
+.audio-player:hover{border-color:var(--brand)}
+.play-btn{width:32px;height:32px;background:var(--brand);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;flex-shrink:0}
+.audio-wave{flex:1;height:24px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 30'%3E%3Cpath d='M0,15 Q5,5 10,15 Q15,25 20,15 Q25,5 30,15 Q35,25 40,15 Q45,5 50,15 Q55,25 60,15 Q65,5 70,15 Q75,25 80,15 Q85,5 90,15 Q95,25 100,15 Q105,5 110,15 Q115,25 120,15 Q125,5 130,15 Q135,25 140,15 Q145,5 150,15 Q155,25 160,15 Q165,5 170,15 Q175,25 180,15 Q185,5 190,15 Q195,25 200,15' fill='none' stroke='%230057B8' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E") center/cover;}
+.audio-dur{font-size:12px;color:var(--text-muted);white-space:nowrap}
+
+/* SETTINGS */
+.setting-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.setting-row:last-child{border-bottom:none}
+.setting-info{flex:1;padding-right:2rem}
+.setting-label{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px}
+.setting-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+.toggle{width:48px;height:26px;background:var(--border);border-radius:13px;cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0}
+.toggle.on{background:var(--success)}
+.toggle::after{content:'';position:absolute;width:20px;height:20px;background:white;border-radius:50%;top:3px;left:3px;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.toggle.on::after{left:25px}
+.delay-select{border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;background:white;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer}
+
+/* FORM ELEMENTS */
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px}
+.form-group input,.form-group textarea,.form-group select{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:border-color 0.15s;background:white}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,87,184,0.08)}
+.form-group textarea{resize:vertical;min-height:80px;line-height:1.6}
+
+/* SAVE BTN */
+.save-btn{background:var(--brand);color:white;border:none;border-radius:10px;padding:11px 28px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s;display:flex;align-items:center;gap:8px}
+.save-btn:hover{background:var(--brand-dark)}
+.btn-row{display:flex;gap:10px;margin-top:1.5rem;flex-wrap:wrap}
+.btn-outline{background:white;color:var(--text-muted);border:1px solid var(--border);border-radius:10px;padding:10px 20px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-outline:hover{border-color:var(--brand);color:var(--brand)}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:#0F1B2D;color:white;padding:12px 24px;border-radius:10px;font-size:14px;z-index:400;transition:transform 0.3s ease;white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* TABS CONTENT */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+@media(max-width:900px){.page-wrap{grid-template-columns:1fr}.job-sidebar{position:relative;top:0}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- CANDIDATE MODAL -->
+<div class="modal-overlay" id="candidateModal">
+  <div class="candidate-modal" id="candidateModalBody"></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">UK<em>Jobs</em></a>
+    <span class="nav-tag">Employer Dashboard</span>
+    <div class="nav-right">
+      <a href="employer.html">Post a job</a>
+      <a href="index.html">View listings</a>
+      <a href="signin.html" class="nav-btn">My account</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <!-- JOB SELECTOR -->
+  <aside class="job-sidebar">
+    <div class="js-header">
+      <h3>Your listings</h3>
+      <p>Select a job to manage</p>
+    </div>
+    <div class="job-item active" onclick="selectJob(0)">
+      <div class="ji-title">Senior Software Engineer</div>
+      <div class="ji-meta">Posted 2 days ago</div>
+      <div class="ji-badge">24 apps</div>
+    </div>
+    <div class="job-item" onclick="selectJob(1)">
+      <div class="ji-title">Product Manager</div>
+      <div class="ji-meta">Posted 5 days ago</div>
+      <div class="ji-badge green">8 apps</div>
+    </div>
+    <div class="job-item" onclick="selectJob(2)">
+      <div class="ji-title">UX Designer</div>
+      <div class="ji-meta">Posted 1 week ago</div>
+      <div class="ji-badge red">41 apps</div>
+    </div>
+    <div class="job-item" onclick="selectJob(3)">
+      <div class="ji-title">Data Engineer</div>
+      <div class="ji-meta">Posted 2 weeks ago</div>
+      <div class="ji-badge">12 apps</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="ph-left">
+        <h2 id="jobTitle">Senior Software Engineer</h2>
+        <p>Smart screening & candidate management</p>
+      </div>
+      <div class="ph-stats">
+        <div class="ph-stat blue"><strong id="statTotal">24</strong><span>Total</span></div>
+        <div class="ph-stat green"><strong id="statPass">9</strong><span>Passed</span></div>
+        <div class="ph-stat red"><strong id="statFail">11</strong><span>Auto-rejected</span></div>
+        <div class="ph-stat orange"><strong id="statReview">4</strong><span>Needs review</span></div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-row">
+      <div class="tab active" onclick="switchTab('candidates')">
+        📋 Candidates <span class="tab-badge" id="tbCandidates">24</span>
+      </div>
+      <div class="tab" onclick="switchTab('filters')">
+        🔍 Auto-filters <span class="tab-badge" id="tbFilters">6</span>
+      </div>
+      <div class="tab" onclick="switchTab('screening')">
+        📞 Phone screening <span class="tab-badge" id="tbQuestions">4</span>
+      </div>
+      <div class="tab" onclick="switchTab('email')">
+        ✉️ Email templates
+      </div>
+      <div class="tab" onclick="switchTab('settings')">
+        ⚙️ Settings
+      </div>
+    </div>
+
+    <!-- ===== CANDIDATES TAB ===== -->
+    <div class="tab-content active section-card" id="tab-candidates">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <select style="border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;background:white;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer" onchange="filterCandidates(this.value)">
+            <option value="all">All candidates</option>
+            <option value="pass">✅ Passed filters</option>
+            <option value="fail">❌ Auto-rejected</option>
+            <option value="review">⚠️ Needs review</option>
+            <option value="pending">⏳ Pending screening</option>
+          </select>
+          <select style="border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;background:white;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer">
+            <option>Sort: Most recent</option>
+            <option>Sort: Highest score</option>
+            <option>Sort: Alphabetical</option>
+          </select>
+        </div>
+        <div style="font-size:13px;color:var(--text-muted)">Showing <span id="showingCount">24</span> candidates</div>
+      </div>
+      <div id="candidateList"></div>
+    </div>
+
+    <!-- ===== FILTERS TAB ===== -->
+    <div class="tab-content section-card" id="tab-filters">
+      <div class="section-title">🔍 Automatic rejection filters</div>
+      <p class="section-sub">Set hard requirements. Candidates who don't meet these will be <strong>automatically rejected</strong> and sent a personalised email immediately. This saves you time and gives candidates a fast, respectful response.</p>
+
+      <div id="filterRules">
+        <div class="filter-rule active-rule" data-id="1">
+          <div class="rule-label">Right to work in UK</div>
+          <select class="rule-op"><option>must be</option></select>
+          <select class="rule-val"><option selected>Yes</option><option>No</option></select>
+          <span class="rule-action reject">❌ Auto-reject</span>
+          <div class="rule-toggle on" onclick="this.classList.toggle('on')" title="Enable/disable"></div>
+          <button class="rule-delete" onclick="deleteRule(this)">✕</button>
+        </div>
+        <div class="filter-rule active-rule" data-id="2">
+          <div class="rule-label">Years of experience</div>
+          <select class="rule-op"><option>at least</option><option>more than</option><option>exactly</option></select>
+          <input class="rule-val" type="number" value="3" min="0" max="30" style="max-width:80px"/>
+          <span style="font-size:13px;color:var(--text-muted)">years</span>
+          <span class="rule-action reject">❌ Auto-reject</span>
+          <div class="rule-toggle on" onclick="this.classList.toggle('on')" title="Enable/disable"></div>
+          <button class="rule-delete" onclick="deleteRule(this)">✕</button>
+        </div>
+        <div class="filter-rule active-rule" data-id="3">
+          <div class="rule-label">Required degree</div>
+          <select class="rule-op"><option>must have</option><option>must not require</option></select>
+          <select class="rule-val"><option>Bachelor's or above</option><option>Master's or above</option><option>PhD</option><option>Any degree</option><option selected>No requirement</option></select>
+          <span class="rule-action warn">⚠️ Flag for review</span>
+          <div class="rule-toggle on" onclick="this.classList.toggle('on')" title="Enable/disable"></div>
+          <button class="rule-delete" onclick="deleteRule(this)">✕</button>
+        </div>
+        <div class="filter-rule active-rule" data-id="4">
+          <div class="rule-label">Salary expectation</div>
+          <select class="rule-op"><option>must be below</option><option>must be within</option></select>
+          <input class="rule-val" type="number" value="130000" min="0" style="max-width:110px"/>
+          <span class="rule-action warn">⚠️ Flag for review</span>
+          <div class="rule-toggle on" onclick="this.classList.toggle('on')" title="Enable/disable"></div>
+          <button class="rule-delete" onclick="deleteRule(this)">✕</button>
+        </div>
+        <div class="filter-rule" data-id="5">
+          <div class="rule-label">Location / commute</div>
+          <select class="rule-op"><option>must be within</option></select>
+          <input class="rule-val" type="number" value="50" min="1" max="200" style="max-width:70px"/>
+          <span style="font-size:13px;color:var(--text-muted)">miles of office</span>
+          <span class="rule-action reject">❌ Auto-reject</span>
+          <div class="rule-toggle" onclick="this.classList.toggle('on')" title="Enable/disable"></div>
+          <button class="rule-delete" onclick="deleteRule(this)">✕</button>
+        </div>
+        <div class="filter-rule" data-id="6">
+          <div class="rule-label">Notice period</div>
+          <select class="rule-op"><option>must be under</option><option>must be over</option></select>
+          <select class="rule-val"><option>1 month</option><option selected>3 months</option><option>6 months</option></select>
+          <span class="rule-action warn">⚠️ Flag for review</span>
+          <div class="rule-toggle" onclick="this.classList.toggle('on')" title="Enable/disable"></div>
+          <button class="rule-delete" onclick="deleteRule(this)">✕</button>
+        </div>
+      </div>
+
+      <button class="add-rule-btn" onclick="addRule()">+ Add a filter rule</button>
+
+      <div class="btn-row">
+        <button class="save-btn" onclick="showToast('✅ Filters saved! Applied to all new applications.')">💾 Save filters</button>
+        <button class="btn-outline" onclick="showToast('Filters applied to all 24 existing applications...')">▶ Apply to existing</button>
+      </div>
+
+      <div style="background:var(--warning-bg);border:1px solid #D97706;border-radius:var(--radius);padding:1rem;margin-top:1.25rem;font-size:13px;color:var(--warning);line-height:1.6">
+        ⚠️ <strong>Important:</strong> Auto-reject emails are sent instantly when a filter is triggered. Make sure your email template is reviewed before enabling. You can always override and manually advance a candidate.
+      </div>
+    </div>
+
+    <!-- ===== SCREENING TAB ===== -->
+    <div class="tab-content section-card" id="tab-screening">
+      <div class="section-title">📞 Phone screening questions</div>
+      <p class="section-sub">Candidates who pass your auto-filters are invited to answer these questions by phone or voice recording. You review the transcripts and AI scores — saving hours of first-round calls.</p>
+
+      <div id="questionsList">
+        <div class="question-card">
+          <div class="q-header">
+            <div class="q-num">1</div>
+            <div class="q-text">Can you briefly describe your most recent software engineering role and what technologies you worked with?</div>
+            <span class="q-type-badge">🎙 Voice (90s)</span>
+            <span class="drag-handle">⠿</span>
+          </div>
+          <div class="q-meta">
+            <span class="q-required">Required</span>
+            <div class="q-meta-item">⏱ Max 90 seconds</div>
+            <div class="q-meta-item">🤖 AI-scored</div>
+          </div>
+          <div class="q-actions">
+            <button class="q-btn" onclick="editQuestion(this)">✏️ Edit</button>
+            <button class="q-btn danger" onclick="this.closest('.question-card').remove();showToast('Question removed')">🗑 Remove</button>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="q-header">
+            <div class="q-num">2</div>
+            <div class="q-text">Are you legally authorised to work in the United Kingdom without sponsorship?</div>
+            <span class="q-type-badge">✅ Yes / No</span>
+            <span class="drag-handle">⠿</span>
+          </div>
+          <div class="q-meta">
+            <span class="q-required">Required · Auto-rejects on "No"</span>
+            <div class="q-meta-item">⚡ Instant filter</div>
+          </div>
+          <div class="q-actions">
+            <button class="q-btn" onclick="editQuestion(this)">✏️ Edit</button>
+            <button class="q-btn danger" onclick="this.closest('.question-card').remove();showToast('Question removed')">🗑 Remove</button>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="q-header">
+            <div class="q-num">3</div>
+            <div class="q-text">What is your salary expectation for this role, and what is your current notice period?</div>
+            <span class="q-type-badge">🎙 Voice (60s)</span>
+            <span class="drag-handle">⠿</span>
+          </div>
+          <div class="q-meta">
+            <span class="q-required">Required</span>
+            <div class="q-meta-item">⏱ Max 60 seconds</div>
+            <div class="q-meta-item">🤖 AI-scored</div>
+          </div>
+          <div class="q-actions">
+            <button class="q-btn" onclick="editQuestion(this)">✏️ Edit</button>
+            <button class="q-btn danger" onclick="this.closest('.question-card').remove();showToast('Question removed')">🗑 Remove</button>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="q-header">
+            <div class="q-num">4</div>
+            <div class="q-text">Tell us about a technically complex problem you've solved. What was the challenge, your approach, and the outcome?</div>
+            <span class="q-type-badge">🎙 Voice (120s)</span>
+            <span class="drag-handle">⠿</span>
+          </div>
+          <div class="q-meta">
+            <span class="q-optional">Optional</span>
+            <div class="q-meta-item">⏱ Max 2 minutes</div>
+            <div class="q-meta-item">🤖 AI-scored</div>
+          </div>
+          <div class="q-actions">
+            <button class="q-btn" onclick="editQuestion(this)">✏️ Edit</button>
+            <button class="q-btn danger" onclick="this.closest('.question-card').remove();showToast('Question removed')">🗑 Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="add-rule-btn" onclick="addQuestion()">+ Add a screening question</button>
+
+      <div class="btn-row">
+        <button class="save-btn" onclick="showToast('✅ Screening questions saved and activated!')">💾 Save questions</button>
+        <button class="btn-outline" onclick="showToast('Preview sent to your email')">📧 Preview candidate experience</button>
+      </div>
+    </div>
+
+    <!-- ===== EMAIL TEMPLATES TAB ===== -->
+    <div class="tab-content section-card" id="tab-email">
+      <div class="section-title">✉️ Automatic email templates</div>
+      <p class="section-sub">Customise the emails candidates receive. Use <code style="background:var(--surface);padding:1px 5px;border-radius:4px;font-size:12px">{name}</code>, <code style="background:var(--surface);padding:1px 5px;border-radius:4px;font-size:12px">{job_title}</code>, <code style="background:var(--surface);padding:1px 5px;border-radius:4px;font-size:12px">{company}</code> as placeholders.</p>
+
+      <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap">
+        <button onclick="loadTemplate('reject')" style="background:var(--danger-bg);color:var(--danger);border:1px solid #E9B4AD;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">❌ Rejection email</button>
+        <button onclick="loadTemplate('screen')" style="background:var(--brand-light);color:var(--brand);border:1px solid #B5D4F4;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">📞 Screening invite</button>
+        <button onclick="loadTemplate('advance')" style="background:var(--success-bg);color:var(--success);border:1px solid #9FD8B5;border-radius:8px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">✅ Advance to interview</button>
+      </div>
+
+      <div class="form-group"><label>Email subject</label><input type="text" id="emailSubject" value="Your application to {job_title} at {company}"/></div>
+      <div class="form-group"><label>Email body</label><textarea id="emailBody" style="min-height:240px"></textarea></div>
+
+      <div style="margin-top:1rem">
+        <div class="section-title" style="margin-bottom:10px">Preview</div>
+        <div class="email-preview">
+          <div class="ep-header">To: <strong>candidate@email.com</strong> &nbsp;·&nbsp; From: <strong>noreply@ukjobs.co.uk</strong> &nbsp;·&nbsp; On behalf of: <strong id="epCompany">Google DeepMind</strong></div>
+          <div class="ep-body">
+            <div class="ep-from">
+              <div class="ep-avatar">UJ</div>
+              <div><div class="ep-from-name">UKJobs — on behalf of Google DeepMind</div><div class="ep-from-email">noreply@ukjobs.co.uk</div></div>
+            </div>
+            <div class="ep-subject" id="epSubject">Your application to Senior Software Engineer at Google DeepMind</div>
+            <div class="ep-content" id="epContent"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="save-btn" onclick="showToast('✅ Email template saved!')">💾 Save template</button>
+        <button class="btn-outline" onclick="showToast('Test email sent to your address')">📨 Send test email</button>
+      </div>
+    </div>
+
+    <!-- ===== SETTINGS TAB ===== -->
+    <div class="tab-content section-card" id="tab-settings">
+      <div class="section-title">⚙️ Screening settings</div>
+      <p class="section-sub" style="margin-bottom:1.5rem">Control how and when automated actions happen for this job listing.</p>
+
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">Auto-reject emails</div><div class="setting-desc">Send rejection email instantly when filters are not met. Candidates get a respectful, fast response.</div></div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">Rejection email delay</div><div class="setting-desc">Wait before sending rejection to avoid appearing fully automated.</div></div>
+        <select class="delay-select"><option>Send immediately</option><option selected>Wait 2 hours</option><option>Wait 24 hours</option><option>Wait 48 hours</option></select>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">Phone screening invites</div><div class="setting-desc">Automatically invite passed candidates to complete phone screening questions.</div></div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">AI answer scoring</div><div class="setting-desc">Use AI to score voice responses against your job requirements and rank candidates.</div></div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">Notify me on new applications</div><div class="setting-desc">Get an email each time someone applies to this listing.</div></div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">Notify me on completed screenings</div><div class="setting-desc">Get an email when a candidate completes all phone screening questions.</div></div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info"><div class="setting-label">Pause all screening</div><div class="setting-desc">Temporarily stop all auto-screening without deleting your setup. Good for holidays.</div></div>
+        <div class="toggle" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="btn-row">
+        <button class="save-btn" onclick="showToast('✅ Settings saved!')">💾 Save settings</button>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /page-wrap -->
+
+<script>
+// DATA
+const JOBS_DATA=[
+  {title:'Senior Software Engineer',total:24,pass:9,fail:11,review:4},
+  {title:'Product Manager',total:8,pass:4,fail:2,review:2},
+  {title:'UX Designer',total:41,pass:15,fail:20,review:6},
+  {title:'Data Engineer',total:12,pass:5,fail:5,review:2}
+];
+
+const CANDIDATES=[
+  {id:1,name:'James Thornton',role:'Software Engineer at Amazon',location:'London, UK',score:92,status:'pass',avatar:'JT',color:'#1A73E8',bg:'#E8F0FB',applied:'2h ago',filters:['✅ Right to work: Yes','✅ Experience: 7 years (req. 3+)','✅ Salary: £95k (within budget)','✅ Location: London (within 50mi)'],screening:{completed:true,answers:[{q:'Describe your most recent role',a:'I\'ve spent the past 3 years at Amazon as a senior engineer on the checkout platform, working primarily with Python, Go, and Kubernetes at scale. We processed over £2B in transactions daily.',score:88,color:'#1B7D4E'},{q:'Right to work in UK?',a:'Yes',score:100,color:'#1B7D4E'},{q:'Salary & notice period',a:'I\'m looking for around £90-100k. I have a 3-month notice period but may be able to negotiate.',score:82,color:'#1B7D4E'},{q:'Complex technical problem',a:'I led a migration of our legacy monolith to microservices over 18 months. The key challenge was zero-downtime migration. We used the strangler fig pattern and shadow traffic testing.',score:95,color:'#1B7D4E'}]}},
+  {id:2,name:'Priya Sharma',role:'Software Engineer at Barclays',location:'London, UK',score:87,status:'pass',avatar:'PS',color:'#7C3AED',bg:'#EDE9FE',applied:'5h ago',filters:['✅ Right to work: Yes','✅ Experience: 5 years (req. 3+)','✅ Salary: £85k (within budget)','✅ Location: London (within 50mi)'],screening:{completed:true,answers:[{q:'Describe your most recent role',a:'At Barclays I work on real-time payments infrastructure using Java and Spring Boot. Our team handles PSD2 compliance and open banking APIs.',score:82,color:'#1B7D4E'},{q:'Right to work in UK?',a:'Yes — British citizen.',score:100,color:'#1B7D4E'},{q:'Salary & notice period',a:'I\'d be looking for £80-90k. My notice is 1 month.',score:90,color:'#1B7D4E'},{q:'Complex technical problem',a:'I redesigned our fraud detection pipeline to run in real-time rather than batch. Reduced false positives by 34% and detection latency from 4s to 180ms.',score:91,color:'#1B7D4E'}]}},
+  {id:3,name:'Marcus Webb',role:'Full-Stack Developer',location:'Manchester',score:null,status:'pending',avatar:'MW',color:'#D97706',bg:'#FEF3C7',applied:'1h ago',filters:['✅ Right to work: Yes','✅ Experience: 4 years (req. 3+)','⚠️ Salary: £140k (above budget)','✅ Location: Manchester (flagged)'],screening:{completed:false,answers:[]}},
+  {id:4,name:'Sophie Chen',role:'Backend Engineer at HSBC',location:'London, UK',score:41,status:'fail',avatar:'SC',color:'#B91C1C',bg:'#FEF2F2',applied:'8h ago',filters:['❌ Right to work: Requires sponsorship — AUTO REJECTED','⚠️ Experience: 1.5 years (req. 3+)'],screening:{completed:false,answers:[],rejectedReason:'Does not have the right to work in the UK without sponsorship. An automatic rejection email has been sent.'}},
+  {id:5,name:'Tom Fitzgerald',role:'Software Engineer at Sky',location:'London, UK',score:31,status:'fail',avatar:'TF',color:'#B91C1C',bg:'#FEF2F2',applied:'10h ago',filters:['✅ Right to work: Yes','❌ Experience: 1 year (req. 3+ years) — AUTO REJECTED'],screening:{completed:false,answers:[],rejectedReason:'Does not meet the minimum 3 years experience requirement. An automatic rejection email has been sent.'}},
+  {id:6,name:'Aisha Okonkwo',role:'Senior Engineer at Vodafone',location:'London, UK',score:78,status:'review',avatar:'AO',color:'#0057B8',bg:'#E8F0FB',applied:'3h ago',filters:['✅ Right to work: Yes','✅ Experience: 6 years (req. 3+)','⚠️ Salary: £135k (flagged — slightly above budget)','✅ Location: London (within 50mi)'],screening:{completed:true,answers:[{q:'Describe your most recent role',a:'I work at Vodafone on their cloud-native transformation, leading a team of 5 engineers using AWS, Terraform, and Kotlin microservices.',score:85,color:'#1B7D4E'},{q:'Right to work in UK?',a:'Yes — ILR holder.',score:100,color:'#1B7D4E'},{q:'Salary & notice period',a:'I\'m expecting around £130-140k given my seniority. 3-month notice.',score:60,color:'#D97706'}]}},
+  {id:7,name:'Liam O\'Brien',role:'Backend Developer at Funding Circle',location:'Bristol',score:null,status:'pending',avatar:'LO',color:'#D97706',bg:'#FEF3C7',applied:'30m ago',filters:['✅ Right to work: Yes','✅ Experience: 4 years (req. 3+)','✅ Salary: £78k (within budget)','⚠️ Location: Bristol (45mi from office)'],screening:{completed:false,answers:[]}},
+];
+
+let displayedCandidates=[...CANDIDATES];
+
+function renderCandidates(){
+  const list=document.getElementById('candidateList');
+  list.innerHTML='';
+  displayedCandidates.forEach(c=>{
+    const div=document.createElement('div');
+    div.className='candidate-row';
+    div.onclick=()=>openCandidate(c.id);
+    const scoreColor=c.score>=80?'var(--success)':c.score>=60?'var(--warning)':c.score?'var(--danger)':'var(--text-muted)';
+    const statusMap={pass:'✅ Passed',fail:'❌ Auto-rejected',review:'⚠️ Needs review',pending:'⏳ Screening sent'};
+    const statusClass={pass:'pass',fail:'fail',review:'review',pending:'pending'};
+    div.innerHTML=`
+      <div class="c-avatar" style="background:${c.bg};color:${c.color}">${c.avatar}</div>
+      <div class="c-info">
+        <div class="c-name">${c.name}</div>
+        <div class="c-meta">
+          <span>${c.role}</span><span>📍 ${c.location}</span><span>Applied ${c.applied}</span>
+          <span class="status-badge ${statusClass[c.status]}">${statusMap[c.status]}</span>
+          ${c.screening.completed?'<span style="font-size:12px;color:var(--brand)">📞 Screening done</span>':''}
+        </div>
+      </div>
+      <div class="c-score">
+        <div class="c-score-num" style="color:${scoreColor}">${c.score??'–'}</div>
+        <div class="c-score-label">${c.score?'AI Score':c.status==='pending'?'Pending':'–'}</div>
+        ${c.score?`<div class="score-bar" style="width:60px"><div class="score-bar-fill" style="width:${c.score}%;background:${scoreColor}"></div></div>`:''}
+      </div>`;
+    list.appendChild(div);
+  });
+  document.getElementById('showingCount').textContent=displayedCandidates.length;
+}
+
+function filterCandidates(val){
+  displayedCandidates=val==='all'?[...CANDIDATES]:CANDIDATES.filter(c=>c.status===val);
+  renderCandidates();
+}
+
+function openCandidate(id){
+  const c=CANDIDATES.find(x=>x.id===id);
+  const scoreColor=c.score>=80?'var(--success)':c.score>=60?'var(--warning)':'var(--danger)';
+  const statusMap={pass:'✅ Passed all filters',fail:'❌ Auto-rejected',review:'⚠️ Flagged for review',pending:'⏳ Screening in progress'};
+  const isRejected=c.status==='fail';
+  const body=document.getElementById('candidateModalBody');
+  body.innerHTML=`
+    <div class="cm-header">
+      <div class="c-avatar" style="background:${c.bg};color:${c.color};width:48px;height:48px;font-size:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;flex-shrink:0">${c.avatar}</div>
+      <div style="flex:1">
+        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;margin-bottom:2px">${c.name}</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:6px">${c.role} · ${c.location}</div>
+        <span class="status-badge ${c.status==='pass'?'pass':c.status==='fail'?'fail':c.status==='review'?'review':'pending'}">${statusMap[c.status]}</span>
+      </div>
+      ${c.score?`<div style="text-align:center"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:${scoreColor}">${c.score}</div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">AI Score</div></div>`:''}
+      <button class="cm-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="cm-body">
+      <div style="margin-bottom:1.25rem">
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Filter results</div>
+        ${c.filters.map(f=>`<div class="filter-check"><span class="icon">${f.startsWith('❌')?'❌':f.startsWith('⚠️')?'⚠️':'✅'}</span>${f.replace(/^[❌⚠️✅]\s*/,'')}</div>`).join('')}
+        ${c.screening.rejectedReason?`<div style="background:var(--danger-bg);border:1px solid #E9B4AD;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:13px;color:var(--danger);line-height:1.5">📧 <strong>Auto-rejection email sent:</strong> ${c.screening.rejectedReason}</div>`:''}
+      </div>
+      ${c.screening.completed?`
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Phone screening answers</div>
+        ${c.screening.answers.map((a,i)=>`
+        <div class="qa-item">
+          <div class="qa-q"><span style="background:var(--brand);color:white;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${i+1}</span>${a.q}</div>
+          <div class="audio-player" onclick="playAudio(this)">
+            <div class="play-btn">▶</div>
+            <div class="audio-wave"></div>
+            <div class="audio-dur">0:${i===3?'48':'2'+i} / ${i===3?'1:20':i===2?'0:45':'1:30'}</div>
+          </div>
+          <div class="qa-a">${a.a}</div>
+          <div class="qa-score">
+            <span style="font-size:12px;color:var(--text-muted)">AI score:</span>
+            <div class="qa-score-bar"><div class="qa-score-fill" style="width:${a.score}%;background:${a.color}"></div></div>
+            <span class="qa-score-text" style="color:${a.color}">${a.score}%</span>
+          </div>
+        </div>`).join('')}
+      </div>`:c.status==='pending'?`<div style="background:var(--warning-bg);border:1px solid #D97706;border-radius:var(--radius);padding:1rem;font-size:13px;color:var(--warning);line-height:1.6">⏳ <strong>Screening invite sent.</strong> Waiting for candidate to complete voice responses. You'll be notified when done.</div>`:''}
+      <div class="cm-actions">
+        ${!isRejected?`<button class="cm-btn advance" onclick="advanceCandidate(${c.id})">✅ Advance to interview</button>`:''}
+        ${!isRejected?`<button class="cm-btn reject" onclick="manualReject(${c.id})">❌ Reject</button>`:''}
+        ${isRejected?`<button class="cm-btn advance" onclick="overrideReject(${c.id})">↩️ Override &amp; advance</button>`:''}
+        <button class="cm-btn phone" onclick="showToast('📧 Screening invite sent to ${c.name}');closeModal()">📞 Send screening</button>
+      </div>
+    </div>`;
+  document.getElementById('candidateModal').classList.add('visible');
+}
+
+function closeModal(){document.getElementById('candidateModal').classList.remove('visible')}
+function advanceCandidate(id){closeModal();showToast('✅ Candidate advanced — interview invite sent!')}
+function manualReject(id){closeModal();showToast('❌ Rejection email sent to candidate')}
+function overrideReject(id){closeModal();showToast('↩️ Rejection overridden — candidate moved to review')}
+function playAudio(el){const btn=el.querySelector('.play-btn');btn.textContent=btn.textContent==='▶'?'⏸':'▶';showToast('🎙 Playing voice response...')}
+
+document.getElementById('candidateModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+// TABS
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['candidates','filters','screening','email','settings'][i]===name));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(name==='email')loadTemplate('reject');
+}
+
+// JOBS
+function selectJob(i){
+  document.querySelectorAll('.job-item').forEach((el,j)=>el.classList.toggle('active',j===i));
+  const j=JOBS_DATA[i];
+  document.getElementById('jobTitle').textContent=j.title;
+  document.getElementById('statTotal').textContent=j.total;
+  document.getElementById('statPass').textContent=j.pass;
+  document.getElementById('statFail').textContent=j.fail;
+  document.getElementById('statReview').textContent=j.review;
+  document.getElementById('tbCandidates').textContent=j.total;
+}
+
+// FILTER RULES
+function deleteRule(btn){
+  if(confirm('Remove this filter rule?')){btn.closest('.filter-rule').remove();showToast('Rule removed')}
+}
+function addRule(){
+  const rules=document.getElementById('filterRules');
+  const div=document.createElement('div');
+  div.className='filter-rule';
+  div.innerHTML=`<select class="rule-op" style="min-width:140px"><option>Right to work in UK</option><option>Years of experience</option><option>Degree level</option><option>Salary expectation</option><option>Location / commute</option><option>Notice period</option><option>Custom question</option></select><select class="rule-op"><option>must be</option><option>at least</option><option>must have</option><option>must be below</option></select><input class="rule-val" type="text" placeholder="Enter value"/><span class="rule-action reject">❌ Auto-reject</span><div class="rule-toggle on" onclick="this.classList.toggle('on')"></div><button class="rule-delete" onclick="deleteRule(this)">✕</button>`;
+  rules.appendChild(div);
+  showToast('New filter rule added');
+}
+
+// QUESTIONS
+function addQuestion(){
+  const list=document.getElementById('questionsList');
+  const n=list.children.length+1;
+  const div=document.createElement('div');
+  div.className='question-card';
+  div.innerHTML=`<div class="q-header"><div class="q-num">${n}</div><input type="text" placeholder="Type your screening question..." style="flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none" /><select style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:13px;font-family:'DM Sans',sans-serif"><option>🎙 Voice (60s)</option><option>🎙 Voice (90s)</option><option>🎙 Voice (120s)</option><option>✅ Yes / No</option><option>📝 Text</option></select><span class="drag-handle">⠿</span></div><div class="q-meta"><span class="q-required">Required</span><div class="q-meta-item">🤖 AI-scored</div></div><div class="q-actions"><button class="q-btn danger" onclick="this.closest('.question-card').remove();showToast('Question removed')">🗑 Remove</button></div>`;
+  list.appendChild(div);
+  div.querySelector('input').focus();
+}
+function editQuestion(btn){
+  const card=btn.closest('.question-card');
+  const textDiv=card.querySelector('.q-text');
+  if(!textDiv)return;
+  const inp=document.createElement('input');
+  inp.type='text';inp.value=textDiv.textContent.trim();
+  inp.style.cssText='flex:1;border:1px solid var(--brand);border-radius:8px;padding:8px 12px;font-size:14px;font-family:DM Sans,sans-serif;outline:none;width:100%';
+  textDiv.replaceWith(inp);inp.focus();
+  inp.onblur=()=>{const d=document.createElement('div');d.className='q-text';d.textContent=inp.value||textDiv.textContent;inp.replaceWith(d);showToast('Question updated')};
+}
+
+// EMAIL TEMPLATES
+const TEMPLATES={
+  reject:{subject:'Your application for {job_title} at {company}',body:`Dear {name},
+
+Thank you for taking the time to apply for the {job_title} role at {company}.
+
+After carefully reviewing your application, we're sorry to let you know that we won't be progressing with your application on this occasion. Based on our current requirements, your profile does not meet one or more of our essential criteria for this role.
+
+We know this isn't the news you were hoping for, and we genuinely appreciate the effort you put into your application. We encourage you to continue applying — we regularly post new roles and would love to consider you for future opportunities.
+
+We wish you all the best in your job search.
+
+Kind regards,
+The {company} Hiring Team`,type:'reject'},
+  screen:{subject:'Next step: Quick phone screening for {job_title} at {company}',body:`Hi {name},
+
+Great news — we've reviewed your application for {job_title} at {company} and we'd like to invite you to complete a short phone screening.
+
+The screening consists of 4 short questions and takes around 10 minutes to complete. You can do it at any time that suits you — just click the link below and record your voice answers.
+
+Your responses will be reviewed by our hiring team and we'll be in touch within 2–3 business days with next steps.
+
+Good luck — we're looking forward to learning more about you!
+
+[Complete your screening →]
+
+Kind regards,
+The {company} Recruitment Team`,type:'screen'},
+  advance:{subject:'Exciting update on your {job_title} application 🎉',body:`Hi {name},
+
+We're delighted to let you know that you've been selected to move forward in our hiring process for the {job_title} role at {company}!
+
+We were really impressed by your application and screening responses, and we'd love to invite you to a formal interview with our team.
+
+Our recruitment coordinator will be in touch within 24 hours to arrange a time that works for you. In the meantime, please feel free to reach out if you have any questions.
+
+We look forward to meeting you!
+
+Warm regards,
+The {company} Hiring Team`,type:'advance'}
+};
+
+function loadTemplate(type){
+  const t=TEMPLATES[type];
+  document.getElementById('emailSubject').value=t.subject.replace(/{job_title}/g,'Senior Software Engineer').replace(/{company}/g,'Google DeepMind');
+  document.getElementById('emailBody').value=t.body;
+  updatePreview();
+}
+function updatePreview(){
+  const subj=document.getElementById('emailSubject').value;
+  const body=document.getElementById('emailBody').value;
+  document.getElementById('epSubject').textContent=subj.replace(/{name}/g,'Sarah').replace(/{job_title}/g,'Senior Software Engineer').replace(/{company}/g,'Google DeepMind');
+  const rendered=body.replace(/{name}/g,'Sarah').replace(/{job_title}/g,'Senior Software Engineer').replace(/{company}/g,'Google DeepMind').replace(/\[(.+?)\]/g,'<a class="ep-cta" href="#">$1</a>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+  document.getElementById('epContent').innerHTML='<p>'+rendered+'</p>';
+}
+document.getElementById('emailBody').addEventListener('input',updatePreview);
+document.getElementById('emailSubject').addEventListener('input',updatePreview);
+
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// INIT
+renderCandidates();
+loadTemplate('reject');
+</script>
+</HTMLEOF>
+echo "screening done"
